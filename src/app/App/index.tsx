@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { PlaceCardEntity } from '@/entities/PlaceCard';
+import { OfferCardEntity } from '@/entities/OfferCard';
 import { UserContextProvider } from '@/entities/User';
 import { LoggedRoute } from '@/features/LoggedRoute';
 import { Error404Page } from '@/pages/Error';
@@ -10,14 +10,14 @@ import { MainPage } from '@/pages/Main';
 import { OfferPage } from '@/pages/Offer';
 
 type AppProps = {
-  places: PlaceCardEntity[];
+  offers: OfferCardEntity[];
 };
 
-export const App = ({ places }: AppProps) => (
+export const App = ({ offers }: AppProps) => (
   <UserContextProvider>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage places={places} />} />
+        <Route path="/" element={<MainPage offers={offers} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/favorites"

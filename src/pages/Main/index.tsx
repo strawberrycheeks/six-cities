@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 
-import { OfferCard, OfferCardEntity } from '@/entities/OfferCard';
+import { OfferCardEntity } from '@/entities/OfferCard';
 import { Header } from '@/features/Header';
+import { OffersList } from '@/features/OffersList';
 
-type MainPageProps = { places: OfferCardEntity[] };
+type MainPageProps = { offers: OfferCardEntity[] };
 
-export const MainPage = ({ places }: MainPageProps) => (
+export const MainPage = ({ offers }: MainPageProps) => (
   <div className={classNames('page', 'page--gray', 'page--main')}>
     <Header />
 
@@ -52,7 +53,7 @@ export const MainPage = ({ places }: MainPageProps) => (
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">
-              {places.length} places to stay in Amsterdam
+              {offers.length} places to stay in Amsterdam
             </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
@@ -80,11 +81,7 @@ export const MainPage = ({ places }: MainPageProps) => (
                 </li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {places.map((place) => (
-                <OfferCard {...place} key={place.name} />
-              ))}
-            </div>
+            <OffersList offers={offers} className="cities__places-list" />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
