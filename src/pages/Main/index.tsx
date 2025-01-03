@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { PlaceCard, PlaceCardEntity } from '../../entities/PlaceCard';
-import { FC } from 'react';
+
+import { PlaceCard, PlaceCardEntity } from '@/entities/PlaceCard';
 
 type MainPageProps = { places: PlaceCardEntity[] };
 
-export const MainPage: FC<MainPageProps> = ({ places }) => (
+export const MainPage = ({ places }: MainPageProps) => (
   <div className={classNames('page', 'page--gray', 'page--main')}>
     <header className="header">
       <div className="container">

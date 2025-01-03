@@ -6,6 +6,11 @@
     "skipLibCheck": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"],
 
+    /* Path aliases */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
