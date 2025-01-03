@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { PlaceCardEntity } from '../interfaces';
-import { FC } from 'react';
 
-export const PlaceCard: FC<PlaceCardEntity> = ({
+import { PlaceCardEntity } from '../interfaces';
+
+export const PlaceCard = ({
   isPremium,
   imgSrc,
   rating,
@@ -10,7 +10,7 @@ export const PlaceCard: FC<PlaceCardEntity> = ({
   price,
   name,
   type,
-}) => (
+}: PlaceCardEntity) => (
   <article className={classNames('cities__card', 'place-card')}>
     {isPremium && (
       <div className="place-card__mark">

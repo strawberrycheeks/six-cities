@@ -1,0 +1,24 @@
+.errorPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-style: oblique;
+  font-weight: 700;
+  line-height: 1.1875;
+  margin-top: 0;
+  margin-bottom: 28px;
+}
+
+.buttonLink {
+  padding: 16px 20px 13px;
+  background-color: #4481c3;
+  color: #fff;
+  border-radius: 3px;
+  width: 431px;
+}

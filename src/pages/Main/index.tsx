@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { PlaceCard, PlaceCardEntity } from '../../entities/PlaceCard';
-import { FC } from 'react';
+
+import { PlaceCard, PlaceCardEntity } from '@/entities/PlaceCard';
 
 type MainPageProps = { places: PlaceCardEntity[] };
 
-export const MainPage: FC<MainPageProps> = ({ places }) => (
+export const MainPage = ({ places }: MainPageProps) => (
   <div className={classNames('page', 'page--gray', 'page--main')}>
     <header className="header">
       <div className="container">
@@ -87,7 +87,9 @@ export const MainPage: FC<MainPageProps> = ({ places }) => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">
+              {places.length} places to stay in Amsterdam
+            </b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
