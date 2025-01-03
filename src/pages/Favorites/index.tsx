@@ -1,6 +1,11 @@
+import { OfferCardEntity } from '@/entities/OfferCard';
 import { Header } from '@/features/Header';
 
-export const FavoritesPage = () => (
+type FavoritesPageProps = {
+  offers: OfferCardEntity[];
+};
+
+export const FavoritesPage = ({ offers }: FavoritesPageProps) => (
   <div className="page">
     <Header />
 

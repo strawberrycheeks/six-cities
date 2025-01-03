@@ -10,10 +10,11 @@ import { MainPage } from '@/pages/Main';
 import { OfferPage } from '@/pages/Offer';
 
 type AppProps = {
+  favorites: OfferCardEntity['id'][];
   offers: OfferCardEntity[];
 };
 
-export const App = ({ offers }: AppProps) => (
+export const App = ({ favorites, offers }: AppProps) => (
   <UserContextProvider>
     <BrowserRouter>
       <Routes>
@@ -23,7 +24,9 @@ export const App = ({ offers }: AppProps) => (
           path="/favorites"
           element={
             <LoggedRoute>
-              <FavoritesPage />
+              <FavoritesPage
+                offers={offers.filter((offer) => favorites.includes(offer.id))}
+              />
             </LoggedRoute>
           }
         />

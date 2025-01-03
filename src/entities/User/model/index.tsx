@@ -3,13 +3,13 @@ import { createContext, PropsWithChildren, useMemo, useState } from 'react';
 import { UserData, UserDataContext } from './types';
 
 const defaultUserDataValue = {
-  isLoggedIn: false,
+  isLoggedIn: true,
 };
 
 const defaultContextValue: UserDataContext = {
   user: defaultUserDataValue,
   logout: () => {},
-  login: () => false,
+  login: () => true,
 };
 
 export const UserContext = createContext<UserDataContext>(defaultContextValue);
