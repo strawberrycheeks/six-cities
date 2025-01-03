@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { OfferCardEntity } from '../model/types';
 import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
+import { Rating } from '@/shared/Rating';
 
 type OfferCardMode = 'full' | 'compact';
 
@@ -94,12 +95,12 @@ export const OfferCard = ({
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${20 * rating}%` }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          rating={rating}
+          mode="compact"
+          containerStyles="place-card__rating"
+          starsStyles="place-card__stars"
+        />
         <h2 className="place-card__name">
           <Link to={`/offer/${id}`}>{name}</Link>
         </h2>
