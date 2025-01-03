@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
-import { PlaceCard, PlaceCardEntity } from '@/entities/PlaceCard';
+import { OfferCard, OfferCardEntity } from '@/entities/OfferCard';
 
-type MainPageProps = { places: PlaceCardEntity[] };
+type MainPageProps = { places: OfferCardEntity[] };
 
 export const MainPage = ({ places }: MainPageProps) => (
   <div className={classNames('page', 'page--gray', 'page--main')}>
@@ -118,7 +118,7 @@ export const MainPage = ({ places }: MainPageProps) => (
             </form>
             <div className="cities__places-list places__list tabs__content">
               {places.map((place) => (
-                <PlaceCard {...place} key={place.name} />
+                <OfferCard {...place} key={place.name} />
               ))}
             </div>
           </section>

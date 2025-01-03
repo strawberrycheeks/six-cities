@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
-import { PlaceCardEntity } from '../interfaces';
+import { OfferCardEntity } from '../model/types';
 
-export const PlaceCard = ({
+export const OfferCard = ({
   isPremium,
   imgSrc,
   rating,
@@ -10,7 +10,7 @@ export const PlaceCard = ({
   price,
   name,
   type,
-}: PlaceCardEntity) => (
+}: OfferCardEntity) => (
   <article className={classNames('cities__card', 'place-card')}>
     {isPremium && (
       <div className="place-card__mark">
