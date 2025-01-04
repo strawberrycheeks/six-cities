@@ -1,12 +1,17 @@
 import classNames from 'classnames';
 
+import { City, CityName } from '@/entities/City';
 import { OfferCardEntity } from '@/entities/OfferCard';
 import { Header } from '@/features/Header';
+import { Map } from '@/features/Map';
 import { OffersList } from '@/features/OffersList';
 
-type MainPageProps = { offers: OfferCardEntity[] };
+type MainPageProps = {
+  cities: Record<CityName, City>;
+  offers: OfferCardEntity[];
+};
 
-export const MainPage = ({ offers }: MainPageProps) => (
+export const MainPage = ({ cities, offers }: MainPageProps) => (
   <div className={classNames('page', 'page--gray', 'page--main')}>
     <Header />
 
@@ -84,7 +89,7 @@ export const MainPage = ({ offers }: MainPageProps) => (
             <OffersList offers={offers} className="cities__places-list" />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map city={cities.Amsterdam} points={offers} />
           </div>
         </div>
       </div>
