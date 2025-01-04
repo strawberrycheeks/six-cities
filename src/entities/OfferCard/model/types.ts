@@ -9,6 +9,8 @@ export type OfferCardEntity = {
   price: number;
   type: OfferType;
   city: CityName;
+  latitude: number;
+  longitude: number;
   imgSrc: string;
   imgAlt?: string;
   isBookmarked?: boolean;
