@@ -16,7 +16,7 @@ export const FavoriteOffersList = ({ offers }: FavoriteOffersListProps) => {
         citiesMap[city] = [];
       }
 
-      citiesMap[city].push(offer);
+      citiesMap[city]?.push(offer);
     });
 
     return citiesMap;
