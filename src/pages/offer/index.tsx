@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { OfferMaximum } from '@/entities/offer-card';
+import { useAppSelector } from '@/app/store/model/hooks';
 import { Header } from '@/features/header';
 import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
@@ -13,12 +14,13 @@ import styles from './styles.module.css';
 export const OfferPage = () => {
   const { id } = useParams();
 
-  // const offer: OfferMaximum = useMemo(() => {
-  //   return offers.find(({ id: offerId }) => offerId === id);
-  // }, [id]);
-  const offer: OfferMaximum | null = null;
+  const offers = useAppSelector((state) => state.offers);
 
-  if (window.isNaN(Number(id)) || !offer) {
+  const offer = useMemo(() => {
+    return offers?.find(({ id: offerId }) => offerId === id);
+  }, [id, offers]);
+
+  if (!id || !offer) {
     return <Navigate to={'/404'} />;
   }
 
@@ -30,7 +32,7 @@ export const OfferPage = () => {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {/* {offer.images?.map((image) => (
+              {/* {offer?.images?.map((image) => (
                 <div
                   className="offer__image-wrapper"
                   key={`${image}-${Math.random()}`}
@@ -49,16 +51,16 @@ export const OfferPage = () => {
             )}
           >
             <div className="offer__wrapper">
-              {/* {Boolean(offer.isPremium) && (
+              {Boolean(offer.isPremium) && (
                 <div className="offer__mark">
                   <span>Premium</span>
                 </div>
-              )} */}
+              )}
               <div className="offer__name-wrapper">
-                {/* <h1
+                <h1
                   className="offer__name"
                   dangerouslySetInnerHTML={{ __html: offer.title ?? '' }}
-                /> */}
+                />
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>

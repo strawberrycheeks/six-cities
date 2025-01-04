@@ -56,7 +56,6 @@ export const CityPlacesList = (props: CityPlacesListProps) => {
             onChange={setSortVariant}
             label="Sort by"
           />
-
           <OffersList
             offers={sortedOffers}
             containerStyles="cities__places-list"
