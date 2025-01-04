@@ -1,4 +1,4 @@
-import { OfferCardEntity } from '@/entities/OfferCard';
+import { OfferCardEntity } from '@/entities/offer-card';
 
 export const offers: OfferCardEntity[] = [
   {
@@ -20,7 +20,7 @@ export const offers: OfferCardEntity[] = [
     rating: 4,
     name: 'Wood and stone place',
     type: 'Room',
-    city: 'Amsterdam',
+    city: 'Brussels',
     latitude: 52.3609553943508,
     longitude: 4.85309666406198,
   },
@@ -31,7 +31,7 @@ export const offers: OfferCardEntity[] = [
     rating: 4,
     name: 'Canal View Prinsengracht',
     type: 'Apartment',
-    city: 'Amsterdam',
+    city: 'Cologne',
     latitude: 52.3909553943508,
     longitude: 4.929309666406198,
   },
@@ -43,7 +43,7 @@ export const offers: OfferCardEntity[] = [
     rating: 4,
     name: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
-    city: 'Amsterdam',
+    city: 'Dusseldorf',
     latitude: 52.3809553943508,
     longitude: 4.939309666406198,
   },
