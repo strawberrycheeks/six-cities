@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
+import { ApiRoutes } from '@/app/api/model/api-routes';
 import { OfferCardEntity } from '@/entities/offer-card';
-import { ApiRoutes } from '../api/routes';
-import { setOffers, setOffersLoadingStatus } from './actions';
-import { AppDispatch, State } from './types';
+
+import { setOffers, setOffersLoadingStatus } from '../actions';
+import { AppDispatch, State } from '../types';
 
 export const fetchOffers = createAsyncThunk<
   void,

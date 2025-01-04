@@ -1,4 +1,7 @@
-import { dateToMonthWordYear, dateToYearMonthDay } from '@/shared/lib/date';
+import {
+  dateToMonthWordYear,
+  dateToYearMonthDay,
+} from '@/shared/ui/date-formatter';
 import { Rating } from '@/shared/ui/rating';
 
 import { ReviewEntity } from '../model/types';

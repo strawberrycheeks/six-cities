@@ -11,9 +11,9 @@ import { sortVariants } from '../model/consts';
 import { SortVariant } from '../model/types';
 import styles from './styles.module.css';
 
-type CityPlacesProps = { offers: OfferCardEntity[]; city: City };
+type CityPlacesListProps = { offers: OfferCardEntity[]; city: City };
 
-export const CityPlaces = (props: CityPlacesProps) => {
+export const CityPlacesList = (props: CityPlacesListProps) => {
   const { offers, city } = props;
 
   const [activeOfferId, setActiveOfferId] = useState<

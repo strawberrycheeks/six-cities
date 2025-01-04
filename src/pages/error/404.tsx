@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-import { AppRoutes } from '@/app/router/routes';
+import { AppRoutes } from '@/shared/model/app-routes';
 
 import styles from './styles.module.css';
 

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { CityName, CityNames } from '@/entities/city';
 import { OfferCard, OfferCardEntity } from '@/entities/offer-card';
 
-type FavoriteOffersListProps = { offers: OfferCardEntity[] };
+type FavoriteOffersListProps = { offers?: OfferCardEntity[] };
 
 export const FavoriteOffersList = (props: FavoriteOffersListProps) => {
   const { offers } = props;
@@ -11,7 +11,7 @@ export const FavoriteOffersList = (props: FavoriteOffersListProps) => {
   const cityToOffersMap = useMemo(() => {
     const citiesMap: Partial<Record<CityName, OfferCardEntity[]>> = {};
 
-    offers.forEach((offer) => {
+    offers?.forEach((offer) => {
       const city = offer.city.name;
 
       if (!CityNames.includes(city)) return;
