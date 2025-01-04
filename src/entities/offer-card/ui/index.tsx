@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { MouseEventHandler } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AppRoutes } from '@/app/router/routes';
 import { Rating } from '@/shared/ui/rating';
+
 import { OfferPreview } from '../model/types';
 
 type OfferCardMode = 'full' | 'compact';

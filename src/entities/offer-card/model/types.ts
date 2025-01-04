@@ -1,6 +1,6 @@
+import { components } from '@/../types/schema';
 import { CityName } from '@/entities/city';
 import { MakeAllRequired } from '@/shared/model/types';
-import { components } from '@/../types/schema';
 
 export type OfferType = 'Apartment' | 'Room';
 

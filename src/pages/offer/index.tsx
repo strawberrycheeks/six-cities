@@ -6,9 +6,9 @@ import { Header } from '@/features/header';
 import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
 import { ReviewsList } from '@/features/reviews-list';
+import { Rating } from '@/shared/ui/rating';
 
 import styles from './styles.module.css';
-import { Rating } from '@/shared/ui/rating';
 
 export const OfferPage = () => {
   const { id } = useParams();
