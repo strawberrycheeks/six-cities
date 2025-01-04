@@ -1,0 +1,1 @@
+export { OffersNearbyList } from './ui';

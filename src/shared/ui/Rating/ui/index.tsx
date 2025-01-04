@@ -7,12 +7,9 @@ type RatingProps = {
   starsStyles?: string;
 };
 
-export const Rating = ({
-  rating,
-  mode,
-  containerStyles,
-  starsStyles,
-}: RatingProps) => {
+export const Rating = (props: RatingProps) => {
+  const { rating, mode, containerStyles, starsStyles } = props;
+
   const isFullMode = mode === 'full';
 
   return (

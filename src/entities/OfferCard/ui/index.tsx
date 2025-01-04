@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-
-import { OfferCardEntity } from '../model/types';
-import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
-import { Rating } from '@/shared/Rating';
+import { MouseEventHandler } from 'react';
+
+import { Rating } from '@/shared/ui/Rating';
+import { OfferCardEntity } from '../model/types';
 
 type OfferCardMode = 'full' | 'compact';
 
@@ -24,20 +24,22 @@ type OfferCardProps = OfferCardEntity & {
   onMouseLeave?: MouseEventHandler;
 };
 
-export const OfferCard = ({
-  id,
-  name,
-  rating,
-  price,
-  type,
-  imgSrc,
-  imgAlt = 'Place image',
-  isBookmarked,
-  isPremium,
-  mode = 'full',
-  onMouseOver,
-  onMouseLeave,
-}: OfferCardProps) => {
+export const OfferCard = (props: OfferCardProps) => {
+  const {
+    id,
+    name,
+    rating,
+    price,
+    type,
+    imgSrc,
+    imgAlt = 'Place image',
+    isBookmarked,
+    isPremium,
+    mode = 'full',
+    onMouseOver,
+    onMouseLeave,
+  } = props;
+
   const isFullMode = mode === 'full';
 
   return (

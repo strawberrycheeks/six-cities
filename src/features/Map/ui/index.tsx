@@ -12,7 +12,9 @@ type MapProps = {
   selectedPoint?: Point;
 };
 
-export const Map = ({ city, points, selectedPoint }: MapProps) => {
+export const Map = (props: MapProps) => {
+  const { city, points, selectedPoint } = props;
+
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, city);
 
