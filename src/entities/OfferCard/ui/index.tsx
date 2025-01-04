@@ -4,6 +4,7 @@ import { MouseEventHandler } from 'react';
 
 import { Rating } from '@/shared/ui/Rating';
 import { OfferCardEntity } from '../model/types';
+import { AppRoutes } from '@/app/routes';
 
 type OfferCardMode = 'full' | 'compact';
 
@@ -62,7 +63,7 @@ export const OfferCard = (props: OfferCardProps) => {
           'place-card__image-wrapper',
         )}
       >
-        <Link to={`/offer/${id}`}>
+        <Link to={`${AppRoutes.OFFER}/${id}`}>
           <img
             className="place-card__image"
             src={imgSrc}
@@ -104,7 +105,7 @@ export const OfferCard = (props: OfferCardProps) => {
           starsStyles="place-card__stars"
         />
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{name}</Link>
+          <Link to={`${AppRoutes.OFFER}/${id}`}>{name}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

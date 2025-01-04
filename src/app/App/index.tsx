@@ -9,6 +9,7 @@ import { FavoritesPage } from '@/pages/Favorites';
 import { LoginPage } from '@/pages/Login';
 import { MainPage } from '@/pages/Main';
 import { OfferPage } from '@/pages/Offer';
+import { AppRoutes } from '../routes';
 
 type AppProps = {
   cities: Record<CityName, City>;
@@ -24,12 +25,12 @@ export const App = (props: AppProps) => {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path={AppRoutes.HOME}
             element={<MainPage offers={offers} cities={cities} />}
           />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
           <Route
-            path="/favorites"
+            path={AppRoutes.FAVORITES}
             element={
               <LoggedRoute>
                 <FavoritesPage
@@ -40,8 +41,8 @@ export const App = (props: AppProps) => {
               </LoggedRoute>
             }
           />
-          <Route path="/offer/:id" element={<OfferPage />} />
-          <Route path="*" element={<Error404Page />} />
+          <Route path={`${AppRoutes.OFFER}/:id`} element={<OfferPage />} />
+          <Route path={AppRoutes.NOT_FOUND} element={<Error404Page />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>

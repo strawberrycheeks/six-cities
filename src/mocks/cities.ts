@@ -8,27 +8,27 @@ export const cities: Record<CityName, City> = {
   },
   Brussels: {
     name: 'Brussels',
-    latitude: 0,
-    longitude: 0,
+    latitude: 50.8476,
+    longitude: 4.3572,
   },
   Cologne: {
     name: 'Cologne',
-    latitude: 0,
-    longitude: 0,
+    latitude: 50.9384,
+    longitude: 6.95997,
   },
   Dusseldorf: {
     name: 'Dusseldorf',
-    latitude: 0,
-    longitude: 0,
+    latitude: 51.2254,
+    longitude: 6.7763,
   },
   Hamburg: {
     name: 'Hamburg',
-    latitude: 0,
-    longitude: 0,
+    latitude: 53.5503,
+    longitude: 10.0007,
   },
   Paris: {
     name: 'Paris',
-    latitude: 0,
-    longitude: 0,
+    latitude: 48.8566,
+    longitude: 2.3515,
   },
 };
