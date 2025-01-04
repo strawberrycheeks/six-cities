@@ -16,9 +16,10 @@ module.exports = {
     project: 'tsconfig.json',
   },
   settings: { react: { version: 'detect' } },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'simple-import-sort'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'simple-import-sort/imports': 'error',
   },
   overrides: [
     {
