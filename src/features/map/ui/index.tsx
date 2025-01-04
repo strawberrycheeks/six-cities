@@ -9,11 +9,11 @@ import { currentCustomIcon, defaultCustomIcon } from './MapIcons';
 type MapProps = {
   city: City;
   points: Point[];
-  selectedPoint?: Point;
+  selectedPointId?: Point['id'];
 };
 
 export const Map = (props: MapProps) => {
-  const { city, points, selectedPoint } = props;
+  const { city, points, selectedPointId } = props;
 
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, city);
@@ -29,7 +29,7 @@ export const Map = (props: MapProps) => {
 
         marker
           .setIcon(
-            selectedPoint !== undefined && point.name === selectedPoint.name
+            point.id === selectedPointId
               ? currentCustomIcon
               : defaultCustomIcon,
           )
@@ -40,7 +40,7 @@ export const Map = (props: MapProps) => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPointId]);
 
   return (
     <section style={{ height: '500px', width: '650px' }} ref={mapRef}></section>
