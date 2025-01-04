@@ -1,1 +1,1 @@
-export type { CityName } from './model/types';
+export type { CityName, City } from './model/types';
