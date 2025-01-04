@@ -6,3 +6,7 @@ import { OfferCardEntity } from '@/entities/offer-card';
 export const setCity = createAction<City>('city/set');
 
 export const setOffers = createAction<OfferCardEntity[]>('offers/set');
+
+export const setOffersLoadingStatus = createAction<boolean>(
+  'offers/setLoadingStatus',
+);

@@ -1,2 +1,6 @@
 export { OfferCard } from './ui/index';
-export type { OfferType, OfferCardEntity } from './model/types';
+export type {
+  OfferType,
+  OfferPreview as OfferCardEntity,
+  OfferMaximum,
+} from './model/types';
