@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { Review, ReviewEntity } from '@/entities/Review';
+import { Review, ReviewEntity } from '@/entities/review';
 
 type ReviewsListProps = {
   reviews: ReviewEntity[];

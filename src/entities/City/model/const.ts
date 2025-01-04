@@ -1,4 +1,4 @@
-import { CityName, City } from '@/entities/City';
+import { City, CityName } from './types';
 
 export const cities: Record<CityName, City> = {
   Amsterdam: {

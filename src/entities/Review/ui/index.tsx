@@ -1,5 +1,5 @@
 import { dateToMonthWordYear, dateToYearMonthDay } from '@/shared/lib/date';
-import { Rating } from '@/shared/ui/Rating';
+import { Rating } from '@/shared/ui/rating';
 import { ReviewEntity } from '../model/types';
 
 export const Review = (props: ReviewEntity) => {

@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import { useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { Header } from '@/features/Header';
-import { Map } from '@/features/Map';
-import { OffersNearbyList } from '@/features/OffersNearbyList';
-import { ReviewForm } from '@/features/ReviewForm';
-import { ReviewsList } from '@/features/ReviewsList';
-import { cities } from '@/mocks/cities';
+import { cities } from '@/entities/city';
+import { Header } from '@/features/header';
+import { Map } from '@/features/map';
+import { OffersNearbyList } from '@/features/offers-nearby-list';
+import { ReviewForm } from '@/features/review-form';
+import { ReviewsList } from '@/features/reviews-list';
 import { offers } from '@/mocks/offers';
 import { reviews } from '@/mocks/reviews';
 

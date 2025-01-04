@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import { OfferCard, OfferCardEntity } from '@/entities/OfferCard';
+import { OfferCard, OfferCardEntity } from '@/entities/offer-card';
 
 type OffersListProps = {
   offers: OfferCardEntity[];

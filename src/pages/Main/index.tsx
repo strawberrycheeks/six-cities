@@ -1,62 +1,41 @@
 import classNames from 'classnames';
+import { useEffect } from 'react';
 
-import { City, CityName } from '@/entities/City';
-import { OfferCardEntity } from '@/entities/OfferCard';
-import { Header } from '@/features/Header';
-import { Map } from '@/features/Map';
-import { OffersList } from '@/features/OffersList';
+import { setCity, setOffers } from '@/app/store/actions';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { cities } from '@/entities/city';
+import { CitiesList } from '@/features/cities-list';
+import { Header } from '@/features/header';
+import { Map } from '@/features/map';
+import { OffersList } from '@/features/offers-list';
+import { offers as mockOffers } from '@/mocks/offers';
 
 import styles from './styles.module.css';
 
-type MainPageProps = {
-  cities: Record<CityName, City>;
-  offers: OfferCardEntity[];
-};
+export const MainPage = () => {
+  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
 
-export const MainPage = (props: MainPageProps) => {
-  const { cities, offers } = props;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setCity(cities.Paris));
+    dispatch(setOffers(mockOffers));
+  }, [dispatch]);
+
+  if (!city || !offers) {
+    return null;
+  }
 
   return (
     <div className={classNames('page', 'page--gray', 'page--main')}>
       <Header />
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+            <CitiesList />
+          </section>{' '}
         </div>
         <div className="cities">
           <div
@@ -68,9 +47,11 @@ export const MainPage = (props: MainPageProps) => {
           >
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
+
               <b className="places__found">
-                {offers.length} places to stay in Amsterdam
+                {offers.length} places to stay in {city.name}
               </b>
+
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -97,13 +78,15 @@ export const MainPage = (props: MainPageProps) => {
                   </li>
                 </ul>
               </form>
+
               <OffersList
                 offers={offers}
                 containerStyles="cities__places-list"
               />
             </section>
+
             <div className="cities__right-section">
-              <Map city={cities.Amsterdam} points={offers} />
+              <Map city={city} points={offers} />
             </div>
           </div>
         </div>

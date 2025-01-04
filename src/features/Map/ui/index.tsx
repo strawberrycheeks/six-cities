@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { layerGroup, Marker } from 'leaflet';
 
-import { City } from '@/entities/City';
+import { City } from '@/entities/city';
 import { Point } from '../model/types';
 import { useMap } from '../lib/useMap';
 import { currentCustomIcon, defaultCustomIcon } from './MapIcons';

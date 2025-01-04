@@ -1,4 +1,4 @@
-import { OffersList } from '@/features/OffersList';
+import { OffersList } from '@/features/offers-list';
 import { offers } from '@/mocks/offers';
 
 export const OffersNearbyList = () => (

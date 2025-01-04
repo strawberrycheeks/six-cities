@@ -1,4 +1,4 @@
-import { CityName } from '@/entities/City';
+import { CityName } from '@/entities/city';
 
 export type OfferType = 'Apartment' | 'Room';
 
