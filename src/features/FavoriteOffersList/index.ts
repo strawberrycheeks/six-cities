@@ -1,0 +1,1 @@
+export { FavoriteOffersList } from './ui';
