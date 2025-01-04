@@ -1,15 +1,12 @@
 import { Provider } from 'react-redux';
 
-import { UserContextProvider } from '@/entities/user';
-import { AppRouter } from './router/app-router';
+import { AppRouter } from './router';
 import { store } from './store';
 
 export const App = () => {
   return (
     <Provider store={store}>
-      <UserContextProvider>
-        <AppRouter />
-      </UserContextProvider>
+      <AppRouter />
     </Provider>
   );
 };

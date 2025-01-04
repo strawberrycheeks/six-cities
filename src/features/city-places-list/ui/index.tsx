@@ -3,17 +3,17 @@ import { useMemo, useState } from 'react';
 
 import { City } from '@/entities/city';
 import { OfferCardEntity } from '@/entities/offer-card';
-import { OffersList } from '@/features/offers-list';
 import { Map } from '@/features/map';
+import { OffersList } from '@/features/offers-list';
 import { Select } from '@/shared/ui/select';
-import { SortVariant } from '../model/types';
-import { sortVariants } from '../model/const';
 
+import { sortVariants } from '../model/consts';
+import { SortVariant } from '../model/types';
 import styles from './styles.module.css';
 
-type CityPlacesProps = { offers: OfferCardEntity[]; city: City };
+type CityPlacesListProps = { offers: OfferCardEntity[]; city: City };
 
-export const CityPlaces = (props: CityPlacesProps) => {
+export const CityPlacesList = (props: CityPlacesListProps) => {
   const { offers, city } = props;
 
   const [activeOfferId, setActiveOfferId] = useState<
@@ -56,7 +56,6 @@ export const CityPlaces = (props: CityPlacesProps) => {
             onChange={setSortVariant}
             label="Sort by"
           />
-
           <OffersList
             offers={sortedOffers}
             containerStyles="cities__places-list"

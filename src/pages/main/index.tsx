@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { useEffect, useMemo } from 'react';
 
-import { fetchOffers } from '@/app/store/api-actions';
-import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { fetchOffers } from '@/app/store/model/async-thunks';
+import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { CitiesList } from '@/features/cities-list';
-import { CityPlaces } from '@/features/city-places';
+import { CityPlacesList } from '@/features/city-places-list';
 import { Header } from '@/features/header';
 import { Spinner } from '@/shared/ui/spinner';
 
@@ -20,7 +20,7 @@ export const MainPage = () => {
   }, [dispatch]);
 
   const offersByCity = useMemo(
-    () => (offers ?? []).filter((offer) => offer.city.name === city?.name),
+    () => (offers ?? []).filter((offer) => offer.city.name === city.name),
     [city, offers],
   );
 
@@ -37,7 +37,7 @@ export const MainPage = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <CityPlaces offers={offersByCity} city={city} />
+          <CityPlacesList offers={offersByCity} city={city} />
         )}
       </main>
     </div>

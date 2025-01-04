@@ -1,10 +1,13 @@
 import { PropsWithChildren } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useUserContext } from '@/entities/user';
+import { AuthorizationStatus } from '@/app/store/model/auth-status';
+import { useAppSelector } from '@/app/store/model/hooks';
 
 export const PrivateRoute = ({ children }: PropsWithChildren) => {
-  const { user } = useUserContext();
+  const isAuthorized = useAppSelector(
+    (state) => state.authorizationStatus === AuthorizationStatus.Auth,
+  );
 
-  return user.isLoggedIn ? children : <Navigate to={'/login'} />;
+  return isAuthorized ? children : <Navigate to={'/login'} />;
 };

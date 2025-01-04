@@ -1,23 +1,12 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { MouseEventHandler } from 'react';
+import { Link } from 'react-router-dom';
 
-import { AppRoutes } from '@/app/router/routes';
+import { AppRoutes } from '@/shared/model/app-routes';
 import { Rating } from '@/shared/ui/rating';
-import { OfferPreview } from '../model/types';
 
-type OfferCardMode = 'full' | 'compact';
-
-const imagesSize = {
-  full: {
-    width: 260,
-    height: 200,
-  },
-  compact: {
-    width: 150,
-    height: 110,
-  },
-};
+import { OFFER_IMAGE_SIZE } from '../model/consts';
+import { OfferCardMode, OfferPreview } from '../model/types';
 
 type OfferCardProps = OfferPreview & {
   imgAlt?: string;
@@ -68,8 +57,8 @@ export const OfferCard = (props: OfferCardProps) => {
           <img
             className="place-card__image"
             src={previewImage}
-            width={imagesSize[mode].width}
-            height={imagesSize[mode].height}
+            width={OFFER_IMAGE_SIZE[mode].width}
+            height={OFFER_IMAGE_SIZE[mode].height}
             alt={imgAlt}
           />
         </Link>

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { setCity } from '@/app/store/actions';
+import { setCity } from '@/app/store/model/actions';
+import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { cities, CityName } from '@/entities/city';
 
 export const CitiesList = () => {

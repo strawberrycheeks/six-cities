@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
+import { AppRoutes } from '@/shared/model/app-routes';
+
 import styles from './styles.module.css';
-import { AppRoutes } from '@/app/router/routes';
 
 export const Error404Page = () => (
   <div className={classNames('page', styles.errorPage)}>

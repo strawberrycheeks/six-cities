@@ -8,4 +8,4 @@ export const getToken = (): Token =>
 export const saveToken = (token: Token) =>
   localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
 
-export const dropToken = () => localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
+export const removeToken = () => localStorage.removeItem(AUTH_TOKEN_KEY_NAME);

@@ -1,18 +1,14 @@
-import { OfferCardEntity } from '@/entities/offer-card';
-import { Header } from '@/features/header';
+import { useAppSelector } from '@/app/store/model/hooks';
 import { FavoriteOffersList } from '@/features/favorite-offers-list';
+import { Footer } from '@/features/footer';
+import { Header } from '@/features/header';
 
-type FavoritesPageProps = {
-  offers: OfferCardEntity[];
-};
-
-export const FavoritesPage = (props: FavoritesPageProps) => {
-  const { offers } = props;
+export const FavoritesPage = () => {
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className="page">
       <Header />
-
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -21,18 +17,7 @@ export const FavoritesPage = (props: FavoritesPageProps) => {
           </section>
         </div>
       </main>
-
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img
-            className="footer__logo"
-            src="img/logo.svg"
-            alt="6 cities logo"
-            width="64"
-            height="33"
-          />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };

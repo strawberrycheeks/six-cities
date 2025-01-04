@@ -1,11 +1,5 @@
-export type UserData = {
-  isLoggedIn: boolean;
-  email?: string;
-  avatarUrl?: string;
-};
+import { components } from '@/../types/schema';
 
-export type UserDataContext = {
-  user: UserData;
-  login: (email: string, password: string) => boolean;
-  logout: () => void;
-};
+export type AuthInfo = Required<components['schemas']['AuthInfo']>;
+
+export type User = Required<components['schemas']['User']>;
