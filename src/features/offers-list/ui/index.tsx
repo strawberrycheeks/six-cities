@@ -1,17 +1,15 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 
 import { OfferCard, OfferCardEntity } from '@/entities/offer-card';
 
 type OffersListProps = {
   offers: OfferCardEntity[];
+  changeActiveOffer?: (id: OfferCardEntity['id'] | null) => void;
   containerStyles?: string;
 };
 
 export const OffersList = (props: OffersListProps) => {
-  const { offers, containerStyles } = props;
-
-  const [, setActiveOfferId] = useState<OfferCardEntity['id'] | null>(null);
+  const { offers, changeActiveOffer, containerStyles } = props;
 
   return (
     <div
@@ -22,10 +20,10 @@ export const OffersList = (props: OffersListProps) => {
           {...place}
           key={place.name}
           onMouseOver={() => {
-            setActiveOfferId(place.id);
+            changeActiveOffer?.(place.id);
           }}
           onMouseLeave={() => {
-            setActiveOfferId(null);
+            changeActiveOffer?.(null);
           }}
         />
       ))}

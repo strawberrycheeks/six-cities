@@ -4,7 +4,7 @@ import { layerGroup, Marker } from 'leaflet';
 import { City } from '@/entities/city';
 import { Point } from '../model/types';
 import { useMap } from '../lib/useMap';
-import { currentCustomIcon, defaultCustomIcon } from './MapIcons';
+import { currentCustomIcon, defaultCustomIcon } from './map-icons';
 
 type MapProps = {
   city: City;
