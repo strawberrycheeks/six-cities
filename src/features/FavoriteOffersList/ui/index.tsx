@@ -5,7 +5,9 @@ import { OfferCard, OfferCardEntity } from '@/entities/OfferCard';
 
 type FavoriteOffersListProps = { offers: OfferCardEntity[] };
 
-export const FavoriteOffersList = ({ offers }: FavoriteOffersListProps) => {
+export const FavoriteOffersList = (props: FavoriteOffersListProps) => {
+  const { offers } = props;
+
   const cityToOffersMap = useMemo(() => {
     const citiesMap: Partial<Record<CityName, OfferCardEntity[]>> = {};
 

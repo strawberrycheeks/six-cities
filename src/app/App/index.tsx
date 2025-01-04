@@ -16,28 +16,34 @@ type AppProps = {
   offers: OfferCardEntity[];
 };
 
-export const App = ({ cities, favorites, offers }: AppProps) => (
-  <UserContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<MainPage offers={offers} cities={cities} />}
-        />
-        <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/favorites"
-          element={
-            <LoggedRoute>
-              <FavoritesPage
-                offers={offers.filter((offer) => favorites.includes(offer.id))}
-              />
-            </LoggedRoute>
-          }
-        />
-        <Route path="/offer/:id" element={<OfferPage />} />
-        <Route path="*" element={<Error404Page />} />
-      </Routes>
-    </BrowserRouter>
-  </UserContextProvider>
-);
+export const App = (props: AppProps) => {
+  const { cities, favorites, offers } = props;
+
+  return (
+    <UserContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage offers={offers} cities={cities} />}
+          />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/favorites"
+            element={
+              <LoggedRoute>
+                <FavoritesPage
+                  offers={offers.filter((offer) =>
+                    favorites.includes(offer.id),
+                  )}
+                />
+              </LoggedRoute>
+            }
+          />
+          <Route path="/offer/:id" element={<OfferPage />} />
+          <Route path="*" element={<Error404Page />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContextProvider>
+  );
+};

@@ -6,7 +6,9 @@ type FavoritesPageProps = {
   offers: OfferCardEntity[];
 };
 
-export const FavoritesPage = ({ offers }: FavoritesPageProps) => {
+export const FavoritesPage = (props: FavoritesPageProps) => {
+  const { offers } = props;
+
   return (
     <div className="page">
       <Header />

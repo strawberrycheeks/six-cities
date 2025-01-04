@@ -5,14 +5,18 @@ import { OfferCard, OfferCardEntity } from '@/entities/OfferCard';
 
 type OffersListProps = {
   offers: OfferCardEntity[];
-  className?: string;
+  containerStyles?: string;
 };
 
-export const OffersList = ({ offers, className }: OffersListProps) => {
+export const OffersList = (props: OffersListProps) => {
+  const { offers, containerStyles } = props;
+
   const [, setActiveOfferId] = useState<OfferCardEntity['id'] | null>(null);
 
   return (
-    <div className={classNames('places__list', 'tabs__content', className)}>
+    <div
+      className={classNames('places__list', 'tabs__content', containerStyles)}
+    >
       {offers.map((place) => (
         <OfferCard
           {...place}
