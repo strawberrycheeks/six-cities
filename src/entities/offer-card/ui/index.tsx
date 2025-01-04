@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { MouseEventHandler } from 'react';
 
-import { Rating } from '@/shared/ui/rating';
-import { OfferCardEntity } from '../model/types';
 import { AppRoutes } from '@/app/router/routes';
+import { Rating } from '@/shared/ui/rating';
+import { OfferPreview } from '../model/types';
 
 type OfferCardMode = 'full' | 'compact';
 
@@ -19,7 +19,8 @@ const imagesSize = {
   },
 };
 
-type OfferCardProps = OfferCardEntity & {
+type OfferCardProps = OfferPreview & {
+  imgAlt?: string;
   mode?: OfferCardMode;
   onMouseOver?: MouseEventHandler;
   onMouseLeave?: MouseEventHandler;
@@ -28,13 +29,13 @@ type OfferCardProps = OfferCardEntity & {
 export const OfferCard = (props: OfferCardProps) => {
   const {
     id,
-    name,
-    rating,
+    title,
+    rating = 0,
     price,
     type,
-    imgSrc,
+    previewImage,
     imgAlt = 'Place image',
-    isBookmarked,
+    isFavorite,
     isPremium,
     mode = 'full',
     onMouseOver,
@@ -66,7 +67,7 @@ export const OfferCard = (props: OfferCardProps) => {
         <Link to={`${AppRoutes.OFFER}/${id}`}>
           <img
             className="place-card__image"
-            src={imgSrc}
+            src={previewImage}
             width={imagesSize[mode].width}
             height={imagesSize[mode].height}
             alt={imgAlt}
@@ -88,7 +89,7 @@ export const OfferCard = (props: OfferCardProps) => {
           </div>
           <button
             className={classNames('place-card__bookmark-button', 'button', {
-              ['place-card__bookmark-button--active']: Boolean(isBookmarked),
+              ['place-card__bookmark-button--active']: isFavorite,
             })}
             type="button"
           >
@@ -105,7 +106,7 @@ export const OfferCard = (props: OfferCardProps) => {
           starsStyles="place-card__stars"
         />
         <h2 className="place-card__name">
-          <Link to={`${AppRoutes.OFFER}/${id}`}>{name}</Link>
+          <Link to={`${AppRoutes.OFFER}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

@@ -18,7 +18,7 @@ export const OffersList = (props: OffersListProps) => {
       {offers.map((place) => (
         <OfferCard
           {...place}
-          key={place.name}
+          key={place.id}
           onMouseOver={() => {
             changeActiveOffer?.(place.id);
           }}

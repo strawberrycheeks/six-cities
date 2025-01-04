@@ -1,18 +1,23 @@
 import { CityName } from '@/entities/city';
+import { MakeAllRequired } from '@/shared/model/types';
+import { components } from '@/../types/schema';
 
 export type OfferType = 'Apartment' | 'Room';
 
-export type OfferCardEntity = {
-  id: number;
-  name: string;
-  rating: number;
-  price: number;
-  type: OfferType;
-  city: CityName;
-  latitude: number;
-  longitude: number;
-  imgSrc: string;
-  imgAlt?: string;
-  isBookmarked?: boolean;
-  isPremium?: boolean;
+export type OfferPreview = MakeAllRequired<
+  components['schemas']['OfferPreview']
+> & {
+  location: MakeAllRequired<
+    Exclude<components['schemas']['OfferPreview']['location'], undefined>
+  >;
+  city: MakeAllRequired<
+    Exclude<components['schemas']['OfferPreview']['city'], undefined>
+  > & {
+    name: CityName;
+  };
 };
+
+export type OfferMaximum = MakeAllRequired<
+  components['schemas']['OfferMaximum']
+> &
+  OfferPreview;

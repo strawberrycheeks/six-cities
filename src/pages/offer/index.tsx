@@ -1,24 +1,22 @@
 import classNames from 'classnames';
-import { useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { cities } from '@/entities/city';
+import { OfferMaximum } from '@/entities/offer-card';
 import { Header } from '@/features/header';
-import { Map } from '@/features/map';
 import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
 import { ReviewsList } from '@/features/reviews-list';
-import { offers } from '@/mocks/offers';
-import { reviews } from '@/mocks/reviews';
 
 import styles from './styles.module.css';
+import { Rating } from '@/shared/ui/rating';
 
 export const OfferPage = () => {
   const { id } = useParams();
 
-  const offer = useMemo(() => {
-    return offers.find(({ id: offerId }) => offerId === Number(id));
-  }, [id]);
+  // const offer: OfferMaximum = useMemo(() => {
+  //   return offers.find(({ id: offerId }) => offerId === id);
+  // }, [id]);
+  const offer: OfferMaximum | null = null;
 
   if (window.isNaN(Number(id)) || !offer) {
     return <Navigate to={'/404'} />;
@@ -32,50 +30,17 @@ export const OfferPage = () => {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/room.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-02.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-03.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/studio-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
-              <div className="offer__image-wrapper">
-                <img
-                  className="offer__image"
-                  src="img/apartment-01.jpg"
-                  alt="Photo studio"
-                />
-              </div>
+              {/* {offer.images?.map((image) => (
+                <div
+                  className="offer__image-wrapper"
+                  key={`${image}-${Math.random()}`}
+                >
+                  <img className="offer__image" src={image} />
+                </div>
+              ))} */}
             </div>
           </div>
+
           <div
             className={classNames(
               'offer__container',
@@ -84,13 +49,16 @@ export const OfferPage = () => {
             )}
           >
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {/* {Boolean(offer.isPremium) && (
+                <div className="offer__mark">
+                  <span>Premium</span>
+                </div>
+              )} */}
               <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
-                </h1>
+                {/* <h1
+                  className="offer__name"
+                  dangerouslySetInnerHTML={{ __html: offer.title ?? '' }}
+                /> */}
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
@@ -98,13 +66,13 @@ export const OfferPage = () => {
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">4.8</span>
-              </div>
+
+              <Rating
+                rating={4.8}
+                containerStyles="offer__rating"
+                starsStyles="offer__stars"
+              />
+
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   Apartment
@@ -163,15 +131,27 @@ export const OfferPage = () => {
                   </p>
                 </div>
               </div>
-              <ReviewsList reviews={reviews} containerStyles="offer__reviews" />
+              <ReviewsList
+                reviews={[
+                  {
+                    userName: 'Max',
+                    userAvatarSrc: 'img/avatar-max.jpg',
+                    rating: 4,
+                    text: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+                    date: new Date('2019-04-24'),
+                  },
+                ]}
+                containerStyles="offer__reviews"
+              />
+
               <ReviewForm />
             </div>
           </div>
           <section className={classNames('map', 'container', styles.offerMap)}>
-            <Map
-              city={cities.Amsterdam}
+            {/* <Map
+              city={cities.Amsterdam!}
               points={[offer, ...offers.slice(0, 3)]}
-            />
+            /> */}
           </section>
         </section>
         <div className="container">
