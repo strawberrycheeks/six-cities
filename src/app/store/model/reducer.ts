@@ -3,19 +3,30 @@ import { createReducer } from '@reduxjs/toolkit';
 import { cities } from '@/entities/city';
 
 import {
+  clearOffer,
+  clearOffers,
+  clearReviews,
   setAuthorizationStatus,
   setCity,
+  setOffer,
+  setOfferLoadingStatus,
   setOffers,
   setOffersLoadingStatus,
+  setReviews,
+  setReviewsLoadingStatus,
   setUser,
 } from './actions';
-import { AuthorizationStatus } from './auth-status';
+import { AuthorizationStatus, FetchStatus } from './enums';
 import { State } from './types';
 
 const initialState: State = {
   city: cities.Paris,
-  isOffersLoading: true,
-  authorizationStatus: AuthorizationStatus.Unknown,
+
+  offersFetchStatus: FetchStatus.INITIAL,
+  offerFetchStatus: FetchStatus.INITIAL,
+  reviewsFetchStatus: FetchStatus.INITIAL,
+
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
 const reducer = createReducer(initialState, (builder) =>
@@ -27,13 +38,37 @@ const reducer = createReducer(initialState, (builder) =>
       state.offers = action.payload;
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
-      state.isOffersLoading = action.payload;
+      state.offersFetchStatus = action.payload;
     })
     .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(setOffer, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(setOfferLoadingStatus, (state, action) => {
+      state.offerFetchStatus = action.payload;
+    })
+    .addCase(setReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(setReviewsLoadingStatus, (state, action) => {
+      state.reviewsFetchStatus = action.payload;
+    })
+    .addCase(clearOffers, (state) => {
+      state.offers = undefined;
+      state.offersFetchStatus = FetchStatus.INITIAL;
+    })
+    .addCase(clearOffer, (state) => {
+      state.offer = undefined;
+      state.offerFetchStatus = FetchStatus.INITIAL;
+    })
+    .addCase(clearReviews, (state) => {
+      state.reviews = undefined;
+      state.reviewsFetchStatus = FetchStatus.INITIAL;
     }),
 );
 

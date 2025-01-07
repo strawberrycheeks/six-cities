@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 
-import { Review, ReviewEntity } from '@/entities/review';
+import { CommentGet, Review } from '@/entities/review';
 
 type ReviewsListProps = {
-  reviews: ReviewEntity[];
+  reviews: CommentGet[];
   containerStyles?: string;
 };
 
@@ -18,7 +18,7 @@ export const ReviewsList = (props: ReviewsListProps) => {
       </h2>
       <ul className="reviews__list">
         {reviews.map((review) => (
-          <Review key={review.date.toString()} {...review} />
+          <Review key={`${review.user.name}-${review.date}`} {...review} />
         ))}
       </ul>
     </section>

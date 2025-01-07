@@ -7,14 +7,16 @@ import { setOffers, setOffersLoadingStatus } from '../actions';
 import { FetchStatus } from '../enums';
 import { DispatchStateExtra } from '../types';
 
-export const fetchOffers = createAsyncThunk<
+export const fetchOffersNearby = createAsyncThunk<
   void,
-  undefined,
+  string,
   DispatchStateExtra
->('offers/fetch', async (_arg, { dispatch, extra: api }) => {
+>('offer/fetchNearbyOffers', async (id, { dispatch, extra: api }) => {
   dispatch(setOffersLoadingStatus(FetchStatus.LOADING));
 
-  const { data } = await api.get<OfferPreview[]>(ApiRoutes.OFFERS);
+  const { data } = await api.get<OfferPreview[]>(
+    `${ApiRoutes.OFFERS}/${id}/nearby`,
+  );
 
   dispatch(setOffersLoadingStatus(FetchStatus.SUCCESS));
   dispatch(setOffers(data));

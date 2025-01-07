@@ -1,19 +1,34 @@
+import { AxiosInstance } from 'axios';
+
 import { components } from '@/../types/schema';
 import { City } from '@/entities/city';
-import { OfferCardEntity } from '@/entities/offer-card';
+import { OfferMaximum, OfferPreview } from '@/entities/offer-card';
+import { CommentGet } from '@/entities/review';
 import { AuthInfo } from '@/entities/user';
 
 import { store } from '..';
-import { AuthorizationStatus } from './auth-status';
+import { AuthorizationStatus, FetchStatus } from './enums';
 
 export type State = {
   city: City;
 
-  offers?: OfferCardEntity[];
-  isOffersLoading: boolean;
-
   user?: AuthInfo;
   authorizationStatus: AuthorizationStatus;
+
+  offers?: OfferPreview[];
+  offersFetchStatus: FetchStatus;
+
+  offer?: OfferMaximum;
+  offerFetchStatus: FetchStatus;
+
+  reviews?: CommentGet[];
+  reviewsFetchStatus: FetchStatus;
+};
+
+export type DispatchStateExtra = {
+  dispatch: AppDispatch;
+  getState: () => State;
+  extra: AxiosInstance;
 };
 
 export type AppDispatch = typeof store.dispatch;
