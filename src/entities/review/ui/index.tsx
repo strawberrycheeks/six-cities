@@ -4,10 +4,17 @@ import {
 } from '@/shared/ui/date-formatter';
 import { Rating } from '@/shared/ui/rating';
 
-import { ReviewEntity } from '../model/types';
+import { CommentGet } from '../model/types';
 
-export const Review = (props: ReviewEntity) => {
-  const { text, date, rating, userName, userAvatarSrc } = props;
+type ReviewProps = CommentGet;
+
+export const Review = (props: ReviewProps) => {
+  const {
+    comment,
+    date,
+    rating,
+    user: { name: userName, avatarUrl: userAvatarUrl },
+  } = props;
 
   return (
     <li className="reviews__item">
@@ -15,7 +22,7 @@ export const Review = (props: ReviewEntity) => {
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
             className="reviews__avatar user__avatar"
-            src={userAvatarSrc}
+            src={userAvatarUrl}
             width="54"
             height="54"
             alt="Reviews avatar"
@@ -31,9 +38,12 @@ export const Review = (props: ReviewEntity) => {
           mode="compact"
         />
 
-        <p className="reviews__text">{text}</p>
-        <time className="reviews__time" dateTime={dateToYearMonthDay(date)}>
-          {dateToMonthWordYear(date)}
+        <p className="reviews__text">{comment}</p>
+        <time
+          className="reviews__time"
+          dateTime={dateToYearMonthDay(new Date(date))}
+        >
+          {dateToMonthWordYear(new Date(date))}
         </time>
       </div>
     </li>

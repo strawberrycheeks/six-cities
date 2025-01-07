@@ -1,7 +1,5 @@
-export type ReviewEntity = {
-  date: Date;
-  text: string;
-  rating: number;
-  userName: string;
-  userAvatarSrc: string;
-};
+import { components } from '@/../types/schema';
+
+export type CommentGet = Required<components['schemas']['CommentGet']>;
+
+export type CommentPost = Required<components['schemas']['CommentPost']>;

@@ -29,7 +29,7 @@ export const createAPI = (): AxiosInstance => {
         // eslint-disable-next-line no-console
         console.error('ERROR:', error.response?.data);
       }
-      throw error;
+      return error.response;
     },
   );
 

@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 
-import { OfferCard, OfferCardEntity } from '@/entities/offer-card';
+import { OfferCard, OfferPreview } from '@/entities/offer-card';
 
 type OffersListProps = {
-  offers: OfferCardEntity[];
-  changeActiveOffer?: (id: OfferCardEntity['id'] | null) => void;
+  offers: OfferPreview[];
+  changeActiveOffer?: (id: OfferPreview['id'] | null) => void;
   containerStyles?: string;
 };
 

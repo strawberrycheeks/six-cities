@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useMemo, useState } from 'react';
 
 import { City } from '@/entities/city';
-import { OfferCardEntity } from '@/entities/offer-card';
+import { OfferPreview } from '@/entities/offer-card';
 import { Map } from '@/features/map';
 import { OffersList } from '@/features/offers-list';
 import { Select } from '@/shared/ui/select';
@@ -11,14 +11,14 @@ import { sortVariants } from '../model/consts';
 import { SortVariant } from '../model/types';
 import styles from './styles.module.css';
 
-type CityPlacesListProps = { offers: OfferCardEntity[]; city: City };
+type CityPlacesListProps = { offers: OfferPreview[]; city: City };
 
 export const CityPlacesList = (props: CityPlacesListProps) => {
   const { offers, city } = props;
 
-  const [activeOfferId, setActiveOfferId] = useState<
-    OfferCardEntity['id'] | null
-  >(null);
+  const [activeOfferId, setActiveOfferId] = useState<OfferPreview['id'] | null>(
+    null,
+  );
   const [sortVariant, setSortVariant] = useState<SortVariant>(
     SortVariant.POPULAR,
   );

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { logout } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/auth-status';
+import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { AppRoutes } from '@/shared/model/app-routes';
 
@@ -15,7 +15,7 @@ export const Header = (props: HeaderProps) => {
   const dispatch = useAppDispatch();
 
   const isAuthorizated = useAppSelector(
-    (state) => state.authorizationStatus === AuthorizationStatus.Auth,
+    (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
   );
 
   const user = useAppSelector((state) => state.user);
@@ -41,9 +41,9 @@ export const Header = (props: HeaderProps) => {
               <ul className="header__nav-list">
                 {isAuthorizated && (
                   <li className="header__nav-item user">
-                    <a
+                    <Link
                       className="header__nav-link header__nav-link--profile"
-                      href="#"
+                      to={AppRoutes.FAVORITES}
                     >
                       <div
                         className="header__avatar-wrapper user__avatar-wrapper"
@@ -55,7 +55,7 @@ export const Header = (props: HeaderProps) => {
                         {user?.email}
                       </span>
                       <span className="header__favorite-count">3</span>
-                    </a>
+                    </Link>
                   </li>
                 )}
 

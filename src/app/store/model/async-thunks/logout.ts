@@ -1,24 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
 
 import { removeToken } from '@/app/api/lib/token';
 import { ApiRoutes } from '@/app/api/model/api-routes';
-import { AuthorizationStatus } from '@/app/store/model/auth-status';
+import { AuthorizationStatus } from '@/app/store/model/enums';
 
 import { setAuthorizationStatus, setUser } from '../actions';
-import { AppDispatch, State } from '../types';
+import { DispatchStateExtra } from '../types';
 
-export const logout = createAsyncThunk<
-  void,
-  undefined,
-  {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
->('user/logout', async (_arg, { dispatch, extra: api }) => {
-  await api.delete(ApiRoutes.LOGOUT);
-  dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
-  dispatch(setUser(undefined));
-  removeToken();
-});
+export const logout = createAsyncThunk<void, undefined, DispatchStateExtra>(
+  'user/logout',
+  async (_arg, { dispatch, extra: api }) => {
+    await api.delete(ApiRoutes.LOGOUT);
+    dispatch(setAuthorizationStatus(AuthorizationStatus.NO_AUTH));
+    dispatch(setUser(undefined));
+    removeToken();
+  },
+);

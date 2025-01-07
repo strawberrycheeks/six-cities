@@ -2,7 +2,7 @@ import { FormEventHandler } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
 import { login } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/auth-status';
+import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { User } from '@/entities/user';
 import { Header } from '@/features/header';
@@ -12,7 +12,7 @@ export const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const isAuthorized = useAppSelector(
-    (state) => state.authorizationStatus === AuthorizationStatus.Auth,
+    (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
   );
 
   const onSubmit: FormEventHandler = (e) => {
