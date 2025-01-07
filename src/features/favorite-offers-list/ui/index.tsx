@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { CityName, CityNames } from '@/entities/city';
 import { OfferCard, OfferPreview } from '@/entities/offer-card';
 
-type FavoriteOffersListProps = { offers?: OfferPreview[] };
+type FavoriteOffersListProps = { offers: OfferPreview[] };
 
 export const FavoriteOffersList = (props: FavoriteOffersListProps) => {
   const { offers } = props;
@@ -28,22 +28,26 @@ export const FavoriteOffersList = (props: FavoriteOffersListProps) => {
 
   return (
     <ul className="favorites__list">
-      {Object.entries(cityToOffersMap).map(([cityName, cityOffers]) => (
-        <li className="favorites__locations-items" key={cityName}>
-          <div className="favorites__locations locations locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>{cityName}</span>
-              </a>
+      {offers.length === 0 ? (
+        <p>No favorite offers yet</p>
+      ) : (
+        Object.entries(cityToOffersMap).map(([cityName, cityOffers]) => (
+          <li className="favorites__locations-items" key={cityName}>
+            <div className="favorites__locations locations locations--current">
+              <div className="locations__item">
+                <a className="locations__item-link" href="#">
+                  <span>{cityName}</span>
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="favorites__places">
-            {cityOffers.map((offer) => (
-              <OfferCard {...offer} mode="compact" key={offer.id} />
-            ))}
-          </div>
-        </li>
-      ))}
+            <div className="favorites__places">
+              {cityOffers.map((offer) => (
+                <OfferCard {...offer} mode="compact" key={offer.id} />
+              ))}
+            </div>
+          </li>
+        ))
+      )}
     </ul>
   );
 };

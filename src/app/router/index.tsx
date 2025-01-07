@@ -8,18 +8,26 @@ import { LoginPage } from '@/pages/login';
 import { MainPage } from '@/pages/main';
 import { OfferPage } from '@/pages/offer';
 import { AppRoutes } from '@/shared/model/app-routes';
+import { Spinner } from '@/shared/ui/spinner';
 
 import { checkLogin } from '../store/model/async-thunks';
-import { useAppDispatch } from '../store/model/hooks';
+import { AuthorizationStatus } from '../store/model/enums';
+import { useAppDispatch, useAppSelector } from '../store/model/hooks';
 
 export const AppRouter = () => {
   const dispatch = useAppDispatch();
+
+  const authorizationStatus = useAppSelector(
+    (state) => state.authorizationStatus,
+  );
 
   useEffect(() => {
     dispatch(checkLogin());
   }, [dispatch]);
 
-  return (
+  return authorizationStatus === AuthorizationStatus.UNKNOWN ? (
+    <Spinner />
+  ) : (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoutes.HOME} element={<MainPage />} />
