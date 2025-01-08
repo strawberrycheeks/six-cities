@@ -1,10 +1,27 @@
-import { useAppSelector } from '@/app/store/model/hooks';
+import { useEffect } from 'react';
+
+import { clearOffers } from '@/app/store/model/actions';
+import { fetchFavoriteOffers } from '@/app/store/model/async-thunks';
+import { FetchStatus } from '@/app/store/model/enums';
+import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { FavoriteOffersList } from '@/features/favorite-offers-list';
 import { Footer } from '@/features/footer';
 import { Header } from '@/features/header';
+import { Spinner } from '@/shared/ui/spinner';
 
 export const FavoritesPage = () => {
+  const dispatch = useAppDispatch();
+
   const offers = useAppSelector((state) => state.offers);
+  const offersFetchStatus = useAppSelector((state) => state.offersFetchStatus);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteOffers());
+
+    return () => {
+      dispatch(clearOffers());
+    };
+  }, [dispatch]);
 
   return (
     <div className="page">
@@ -13,7 +30,11 @@ export const FavoritesPage = () => {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoriteOffersList offers={offers} />
+            {offersFetchStatus !== FetchStatus.SUCCESS || !offers ? (
+              <Spinner />
+            ) : (
+              <FavoriteOffersList offers={offers} />
+            )}
           </section>
         </div>
       </main>

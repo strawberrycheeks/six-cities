@@ -1,32 +1,45 @@
 import classNames from 'classnames';
 
+import { setActiveOfferId } from '@/app/store/model/actions';
+import { useAppDispatch } from '@/app/store/model/hooks';
 import { OfferCard, OfferPreview } from '@/entities/offer-card';
 
 type OffersListProps = {
   offers: OfferPreview[];
-  changeActiveOffer?: (id: OfferPreview['id'] | null) => void;
+  shouldUpdateActiveOffer?: boolean;
   containerStyles?: string;
 };
 
 export const OffersList = (props: OffersListProps) => {
-  const { offers, changeActiveOffer, containerStyles } = props;
+  const { offers, shouldUpdateActiveOffer, containerStyles } = props;
+
+  const dispatch = useAppDispatch();
+
+  const changeActiveOffer = (id?: OfferPreview['id']) => {
+    if (!shouldUpdateActiveOffer) return;
+    dispatch(setActiveOfferId(id));
+  };
 
   return (
     <div
       className={classNames('places__list', 'tabs__content', containerStyles)}
     >
-      {offers.map((place) => (
-        <OfferCard
-          {...place}
-          key={place.id}
-          onMouseOver={() => {
-            changeActiveOffer?.(place.id);
-          }}
-          onMouseLeave={() => {
-            changeActiveOffer?.(null);
-          }}
-        />
-      ))}
+      {offers.length === 0 ? (
+        <p>No places to stay available</p>
+      ) : (
+        offers.map((place) => (
+          <OfferCard
+            {...place}
+            key={place.id}
+            onMouseOver={() => {
+              changeActiveOffer(place.id);
+            }}
+            onMouseLeave={() => {
+              changeActiveOffer();
+            }}
+          />
+        ))
+      )}
     </div>
   );
 };

@@ -16,9 +16,6 @@ type CityPlacesListProps = { offers: OfferPreview[]; city: City };
 export const CityPlacesList = (props: CityPlacesListProps) => {
   const { offers, city } = props;
 
-  const [activeOfferId, setActiveOfferId] = useState<OfferPreview['id'] | null>(
-    null,
-  );
   const [sortVariant, setSortVariant] = useState<SortVariant>(
     SortVariant.POPULAR,
   );
@@ -59,15 +56,11 @@ export const CityPlacesList = (props: CityPlacesListProps) => {
           <OffersList
             offers={sortedOffers}
             containerStyles="cities__places-list"
-            changeActiveOffer={setActiveOfferId}
+            shouldUpdateActiveOffer
           />
         </section>
         <div className="cities__right-section">
-          <Map
-            city={city}
-            points={offers}
-            selectedPointId={activeOfferId ?? undefined}
-          />
+          <Map city={city} points={offers} />
         </div>
       </div>
     </div>

@@ -23,6 +23,8 @@ export type State = {
 
   reviews?: CommentGet[];
   reviewsFetchStatus: FetchStatus;
+
+  activeOfferId?: OfferPreview['id'];
 };
 
 export type DispatchStateExtra = {

@@ -1,17 +1,19 @@
 import classNames from 'classnames';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import {
   clearOffer,
   clearOffers,
   clearReviews,
+  setActiveOfferId,
 } from '@/app/store/model/actions';
 import {
   addOfferReview,
   fetchOffer,
   fetchOfferReviews,
   fetchOffersNearby,
+  setIsOfferFavorite,
 } from '@/app/store/model/async-thunks';
 import { AuthorizationStatus, FetchStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
@@ -37,7 +39,11 @@ export const OfferPage = () => {
   const offers = useAppSelector((state) => state.offers);
   const offersFetchStatus = useAppSelector((state) => state.offersFetchStatus);
 
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector((state) =>
+    state.reviews
+      ?.slice(0, 10)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+  );
   const reviewsFetchStatus = useAppSelector(
     (state) => state.reviewsFetchStatus,
   );
@@ -46,10 +52,16 @@ export const OfferPage = () => {
     (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
   );
 
+  const firstThreeOffers = useMemo(
+    () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
+    [offer, offers],
+  );
+
   useEffect(() => {
     if (!id) return;
 
     dispatch(fetchOffer(id));
+    dispatch(setActiveOfferId(id));
 
     return () => {
       dispatch(clearOffer());
@@ -81,6 +93,18 @@ export const OfferPage = () => {
     },
     [dispatch, offer],
   );
+
+  const onFavoriteClick = () => {
+    if (!offer) return;
+
+    dispatch(
+      setIsOfferFavorite({
+        offerId: offer.id,
+        isFavorite: !offer.isFavorite,
+        context: 'offer',
+      }),
+    );
+  };
 
   if (!id || (offerFetchStatus === FetchStatus.FAILURE && !offer)) {
     return <Navigate to={'/404'} />;
@@ -126,8 +150,15 @@ export const OfferPage = () => {
 
                   {isAuthorizated && (
                     <button
-                      className="offer__bookmark-button button"
+                      className={classNames(
+                        'offer__bookmark-button',
+                        'button',
+                        {
+                          ['offer__bookmark-button--active']: offer.isFavorite,
+                        },
+                      )}
                       type="button"
+                      onClick={onFavoriteClick}
                     >
                       <svg
                         className="offer__bookmark-icon"
@@ -158,10 +189,10 @@ export const OfferPage = () => {
                     {offer.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} Bedrooms
+                    {offer.bedrooms} Bedroom{offer.bedrooms > 1 ? 's' : ''}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} adults
+                    Max {offer.maxAdults} adult{offer.maxAdults > 1 ? 's' : ''}
                   </li>
                 </ul>
                 <div className="offer__price">
@@ -215,11 +246,7 @@ export const OfferPage = () => {
             <section
               className={classNames('map', 'container', styles.offerMap)}
             >
-              <Map
-                city={cities[offer.city.name]}
-                points={[offer, ...(offers ?? [])]}
-                selectedPointId={offer.id}
-              />
+              <Map city={cities[offer.city.name]} points={firstThreeOffers} />
             </section>
           </section>
         )}
