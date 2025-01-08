@@ -1,6 +1,7 @@
 import { layerGroup, Marker } from 'leaflet';
 import { useEffect, useRef } from 'react';
 
+import { useAppSelector } from '@/app/store/model/hooks';
 import { City } from '@/entities/city';
 
 import { useMap } from '../lib/useMap';
@@ -10,14 +11,15 @@ import { currentCustomIcon, defaultCustomIcon } from './map-icons';
 type MapProps = {
   city: City;
   points: Point[];
-  selectedPointId?: Point['id'];
 };
 
 export const Map = (props: MapProps) => {
-  const { city, points, selectedPointId } = props;
+  const { city, points } = props;
 
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, city);
+
+  const selectedPointId = useAppSelector((state) => state.activeOfferId);
 
   useEffect(() => {
     if (map) {

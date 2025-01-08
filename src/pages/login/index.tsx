@@ -1,9 +1,10 @@
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useMemo } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
 import { login } from '@/app/store/model/async-thunks';
 import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
+import { CityNames } from '@/entities/city';
 import { User } from '@/entities/user';
 import { Header } from '@/features/header';
 import { AppRoutes } from '@/shared/model/app-routes';
@@ -27,6 +28,11 @@ export const LoginPage = () => {
 
     dispatch(login(user as User));
   };
+
+  const city = useMemo(
+    () => CityNames[Math.floor(Math.random() * CityNames.length)],
+    [],
+  );
 
   if (isAuthorized) {
     return <Navigate to={AppRoutes.HOME} />;
@@ -64,6 +70,7 @@ export const LoginPage = () => {
                   name="password"
                   placeholder="Password"
                   required
+                  pattern="(.*[a-zA-Z].*[\d].*)|(.*[\d].*[a-zA-Z].*)"
                 />
               </div>
               <button
@@ -76,8 +83,11 @@ export const LoginPage = () => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoutes.HOME}>
-                <span>Amsterdam</span>
+              <Link
+                className="locations__item-link"
+                to={`${AppRoutes.HOME}#${city}`}
+              >
+                <span>{city}</span>
               </Link>
             </div>
           </section>

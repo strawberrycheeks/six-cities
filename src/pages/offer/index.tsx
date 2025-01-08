@@ -1,11 +1,12 @@
 import classNames from 'classnames';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import {
   clearOffer,
   clearOffers,
   clearReviews,
+  setActiveOfferId,
 } from '@/app/store/model/actions';
 import {
   addOfferReview,
@@ -38,7 +39,11 @@ export const OfferPage = () => {
   const offers = useAppSelector((state) => state.offers);
   const offersFetchStatus = useAppSelector((state) => state.offersFetchStatus);
 
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector((state) =>
+    state.reviews
+      ?.slice(0, 10)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+  );
   const reviewsFetchStatus = useAppSelector(
     (state) => state.reviewsFetchStatus,
   );
@@ -47,10 +52,16 @@ export const OfferPage = () => {
     (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
   );
 
+  const firstThreeOffers = useMemo(
+    () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
+    [offer, offers],
+  );
+
   useEffect(() => {
     if (!id) return;
 
     dispatch(fetchOffer(id));
+    dispatch(setActiveOfferId(id));
 
     return () => {
       dispatch(clearOffer());
@@ -178,10 +189,10 @@ export const OfferPage = () => {
                     {offer.type}
                   </li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} Bedrooms
+                    {offer.bedrooms} Bedroom{offer.bedrooms > 1 ? 's' : ''}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} adults
+                    Max {offer.maxAdults} adult{offer.maxAdults > 1 ? 's' : ''}
                   </li>
                 </ul>
                 <div className="offer__price">
@@ -235,11 +246,7 @@ export const OfferPage = () => {
             <section
               className={classNames('map', 'container', styles.offerMap)}
             >
-              <Map
-                city={cities[offer.city.name]}
-                points={[offer, ...(offers ?? [])]}
-                selectedPointId={offer.id}
-              />
+              <Map city={cities[offer.city.name]} points={firstThreeOffers} />
             </section>
           </section>
         )}
