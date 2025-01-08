@@ -5,6 +5,7 @@ import { City } from '@/entities/city';
 import { OfferPreview } from '@/entities/offer-card';
 import { Map } from '@/features/map';
 import { OffersList } from '@/features/offers-list';
+import { EmptyState } from '@/shared/ui/empty-state';
 import { Select } from '@/shared/ui/select';
 
 import { sortVariants } from '../model/consts';
@@ -35,34 +36,38 @@ export const CityPlacesList = (props: CityPlacesListProps) => {
 
   return (
     <div className="cities">
-      <div
-        className={classNames(
-          'cities__places-container',
-          'container',
-          styles.gridContainer,
-        )}
-      >
-        <section className="cities__places places">
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">
-            {offers.length} places to stay in {city.name}
-          </b>
-          <Select
-            value={sortVariant}
-            options={sortVariants}
-            onChange={setSortVariant}
-            label="Sort by"
-          />
-          <OffersList
-            offers={sortedOffers}
-            containerStyles="cities__places-list"
-            shouldUpdateActiveOffer
-          />
-        </section>
-        <div className="cities__right-section">
-          <Map city={city} points={offers} />
+      {offers.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <div
+          className={classNames(
+            'cities__places-container',
+            'container',
+            styles.gridContainer,
+          )}
+        >
+          <section className="cities__places places">
+            <h2 className="visually-hidden">Places</h2>
+            <b className="places__found">
+              {offers.length} places to stay in {city.name}
+            </b>
+            <Select
+              value={sortVariant}
+              onChange={setSortVariant}
+              options={sortVariants}
+              label="Sort by"
+            />
+            <OffersList
+              offers={sortedOffers}
+              containerStyles="cities__places-list"
+              shouldUpdateActiveOffer
+            />
+          </section>
+          <div className="cities__right-section">
+            <Map city={city} points={offers} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
