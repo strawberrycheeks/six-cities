@@ -4,8 +4,7 @@ import { City } from '@/entities/city';
 import { OfferMaximum, OfferPreview } from '@/entities/offer-card';
 import { CommentGet } from '@/entities/review';
 import { AuthInfo } from '@/entities/user';
-
-import { AuthorizationStatus, FetchStatus } from './enums';
+import { AuthorizationStatus, FetchStatus } from '@/shared/model/enums';
 
 export const setCity = createAction<City>('city/set');
 

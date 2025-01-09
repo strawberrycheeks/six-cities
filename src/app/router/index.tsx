@@ -10,8 +10,8 @@ import { OfferPage } from '@/pages/offer';
 import { AppRoutes } from '@/shared/model/app-routes';
 import { Spinner } from '@/shared/ui/spinner';
 
+import { AuthorizationStatus } from '../../shared/model/enums';
 import { checkLogin } from '../store/model/async-thunks';
-import { AuthorizationStatus } from '../store/model/enums';
 import { useAppDispatch, useAppSelector } from '../store/model/hooks';
 
 export const AppRouter = () => {

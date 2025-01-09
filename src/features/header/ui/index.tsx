@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { logout } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { AppRoutes } from '@/shared/model/app-routes';
+import { AuthorizationStatus } from '@/shared/model/enums';
 
 type HeaderProps = {
   isOnlyLogo?: boolean;

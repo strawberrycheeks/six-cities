@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { saveToken } from '@/app/api/lib/token';
 import { ApiRoutes } from '@/app/api/model/api-routes';
-import { AuthorizationStatus } from '@/app/store/model/enums';
+import { AuthorizationStatus } from '@/shared/model/enums';
 
 import { setAuthorizationStatus, setUser } from '../actions';
 import { AuthResponse, DispatchStateExtra } from '../types';

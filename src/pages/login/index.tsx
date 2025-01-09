@@ -2,12 +2,12 @@ import { FormEventHandler, useMemo } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
 import { login } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { CityNames } from '@/entities/city';
 import { User } from '@/entities/user';
 import { Header } from '@/features/header';
 import { AppRoutes } from '@/shared/model/app-routes';
+import { AuthorizationStatus } from '@/shared/model/enums';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();

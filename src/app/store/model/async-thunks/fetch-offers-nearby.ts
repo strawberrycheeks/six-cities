@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ApiRoutes } from '@/app/api/model/api-routes';
 import { OfferPreview } from '@/entities/offer-card';
+import { FetchStatus } from '@/shared/model/enums';
 
 import { setOffers, setOffersLoadingStatus } from '../actions';
-import { FetchStatus } from '../enums';
 import { DispatchStateExtra } from '../types';
 
 export const fetchOffersNearby = createAsyncThunk<

@@ -15,7 +15,6 @@ import {
   fetchOffersNearby,
   setIsOfferFavorite,
 } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus, FetchStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { cities } from '@/entities/city';
 import { Header } from '@/features/header';
@@ -23,6 +22,7 @@ import { Map } from '@/features/map';
 import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
 import { ReviewsList } from '@/features/reviews-list';
+import { AuthorizationStatus, FetchStatus } from '@/shared/model/enums';
 import { Rating } from '@/shared/ui/rating';
 import { Spinner } from '@/shared/ui/spinner';
 

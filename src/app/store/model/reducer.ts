@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { cities } from '@/entities/city';
+import { AuthorizationStatus, FetchStatus } from '@/shared/model/enums';
 
 import {
   clearOffer,
@@ -17,7 +18,6 @@ import {
   setReviewsLoadingStatus,
   setUser,
 } from './actions';
-import { AuthorizationStatus, FetchStatus } from './enums';
 import { State } from './types';
 
 const initialState: State = {

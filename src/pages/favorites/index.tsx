@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 
 import { clearOffers } from '@/app/store/model/actions';
 import { fetchFavoriteOffers } from '@/app/store/model/async-thunks';
-import { FetchStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { FavoriteOffersList } from '@/features/favorite-offers-list';
 import { Footer } from '@/features/footer';
 import { Header } from '@/features/header';
+import { FetchStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
 
 export const FavoritesPage = () => {

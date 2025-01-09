@@ -3,9 +3,9 @@ import { StatusCodes } from 'http-status-codes';
 
 import { ApiRoutes } from '@/app/api/model/api-routes';
 import { OfferMaximum } from '@/entities/offer-card';
+import { FetchStatus } from '@/shared/model/enums';
 
 import { setOffer, setOfferLoadingStatus } from '../actions';
-import { FetchStatus } from '../enums';
 import { DispatchStateExtra } from '../types';
 
 export const fetchOffer = createAsyncThunk<void, string, DispatchStateExtra>(

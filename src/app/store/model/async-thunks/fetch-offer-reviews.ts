@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ApiRoutes } from '@/app/api/model/api-routes';
 import { CommentGet } from '@/entities/review';
+import { FetchStatus } from '@/shared/model/enums';
 
 import { setReviews, setReviewsLoadingStatus } from '../actions';
-import { FetchStatus } from '../enums';
 import { DispatchStateExtra } from '../types';
 
 export const fetchOfferReviews = createAsyncThunk<

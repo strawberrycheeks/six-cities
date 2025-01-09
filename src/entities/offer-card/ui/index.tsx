@@ -3,9 +3,9 @@ import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 
 import { setIsOfferFavorite } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { AppRoutes } from '@/shared/model/app-routes';
+import { AuthorizationStatus } from '@/shared/model/enums';
 import { Rating } from '@/shared/ui/rating';
 
 import { OFFER_IMAGE_SIZE } from '../model/consts';

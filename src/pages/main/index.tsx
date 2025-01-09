@@ -4,12 +4,12 @@ import { useLocation } from 'react-router-dom';
 
 import { clearOffers, setCity } from '@/app/store/model/actions';
 import { fetchOffers } from '@/app/store/model/async-thunks';
-import { FetchStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { cities, CityName, CityNames } from '@/entities/city';
 import { CitiesList } from '@/features/cities-list';
 import { CityPlacesList } from '@/features/city-places-list';
 import { Header } from '@/features/header';
+import { FetchStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
 
 export const MainPage = () => {

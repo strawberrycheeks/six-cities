@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { removeToken } from '@/app/api/lib/token';
 import { ApiRoutes } from '@/app/api/model/api-routes';
-import { AuthorizationStatus } from '@/app/store/model/enums';
+import { AuthorizationStatus } from '@/shared/model/enums';
 
 import { setAuthorizationStatus, setUser } from '../actions';
 import { DispatchStateExtra } from '../types';

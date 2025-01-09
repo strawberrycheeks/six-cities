@@ -10,3 +10,10 @@ export const enum FetchStatus {
   SUCCESS = 'SUCCESS',
   FAILURE = 'FAILURE',
 }
+
+export const enum NameSpace {
+  OFFER = 'OFFER',
+  USER = 'USER',
+  CITY = 'CITY',
+  REVIEW = 'REVIEW',
+}
