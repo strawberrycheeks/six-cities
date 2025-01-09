@@ -4,12 +4,12 @@ import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
 
 import { AuthInfo } from './types';
 
-export type State = {
+export type UserState = {
   user?: AuthInfo;
   authorizationStatus: AuthorizationStatus;
 };
 
-const initialState: State = {
+const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 

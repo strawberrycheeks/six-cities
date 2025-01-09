@@ -4,7 +4,7 @@ import { FetchStatus, NameSpace } from '@/shared/model/enums';
 
 import { OfferMaximum, OfferPreview } from './types';
 
-export type State = {
+export type OfferState = {
   offers?: OfferPreview[];
   offersFetchStatus: FetchStatus;
 
@@ -14,7 +14,7 @@ export type State = {
   activeOfferId?: OfferPreview['id'];
 };
 
-const initialState: State = {
+const initialState: OfferState = {
   offersFetchStatus: FetchStatus.INITIAL,
   offerFetchStatus: FetchStatus.INITIAL,
 };
@@ -49,7 +49,6 @@ export const offerCardSlice = createSlice({
     ) => {
       state.activeOfferId = action.payload;
     },
-    // setIsOfferFavorite:
   },
 });
 

@@ -4,12 +4,12 @@ import { FetchStatus, NameSpace } from '@/shared/model/enums';
 
 import { CommentGet } from '..';
 
-export type State = {
+export type ReviewState = {
   reviews?: CommentGet[];
   reviewsFetchStatus: FetchStatus;
 };
 
-const initialState: State = {
+const initialState: ReviewState = {
   reviewsFetchStatus: FetchStatus.INITIAL,
 };
 
@@ -24,11 +24,11 @@ export const reviewSlice = createSlice({
       state.reviews = undefined;
       state.reviewsFetchStatus = FetchStatus.INITIAL;
     },
-    setReviewsLoadingStatus: (state, action: PayloadAction<FetchStatus>) => {
+    setReviewsFetchStatus: (state, action: PayloadAction<FetchStatus>) => {
       state.reviewsFetchStatus = action.payload;
     },
   },
 });
 
-export const { setReviews, clearReviews, setReviewsLoadingStatus } =
+export const { setReviews, clearReviews, setReviewsFetchStatus } =
   reviewSlice.actions;

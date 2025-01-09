@@ -5,7 +5,7 @@ import { ApiRoutes } from '@/app/api/model/api-routes';
 import { DispatchStateExtra, State } from '@/app/store/model/types';
 import { FetchStatus, NameSpace } from '@/shared/model/enums';
 
-import { setReviews, setReviewsLoadingStatus } from '../model/reducer';
+import { setReviews, setReviewsFetchStatus } from '../model/reducer';
 import { CommentGet, CommentPost } from '../model/types';
 
 export const fetchOfferReviews = createAsyncThunk<
@@ -13,11 +13,11 @@ export const fetchOfferReviews = createAsyncThunk<
   string,
   DispatchStateExtra
 >('review/fetchOfferReview', async (id, { dispatch, extra: api }) => {
-  dispatch(setReviewsLoadingStatus(FetchStatus.LOADING));
+  dispatch(setReviewsFetchStatus(FetchStatus.LOADING));
 
   const { data } = await api.get<CommentGet[]>(`${ApiRoutes.REVIEWS}/${id}`);
 
-  dispatch(setReviewsLoadingStatus(FetchStatus.SUCCESS));
+  dispatch(setReviewsFetchStatus(FetchStatus.SUCCESS));
   dispatch(setReviews(data));
 });
 

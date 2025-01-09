@@ -5,11 +5,11 @@ import { NameSpace } from '@/shared/model/enums';
 import { cities } from './consts';
 import { City } from './types';
 
-export type State = {
+export type CityState = {
   city: City;
 };
 
-const initialState: State = {
+const initialState: CityState = {
   city: cities.Paris,
 };
 
