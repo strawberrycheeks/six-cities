@@ -2,27 +2,34 @@ import classNames from 'classnames';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
+import { cities } from '@/entities/city';
 import {
   clearOffer,
   clearOffers,
-  clearReviews,
+  fetchOffer,
+  fetchOffersNearby,
+  getOffer,
+  getOfferFetchStatus,
+  getOffers,
+  getOffersFetchStatus,
   setActiveOfferId,
-} from '@/app/store/model/actions';
+  setIsOfferFavorite,
+} from '@/entities/offer-card';
 import {
   addOfferReview,
-  fetchOffer,
+  clearReviews,
   fetchOfferReviews,
-  fetchOffersNearby,
-  setIsOfferFavorite,
-} from '@/app/store/model/async-thunks';
-import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
-import { cities } from '@/entities/city';
+  getLatest10Reviews,
+  getReviewsFetchStatus,
+} from '@/entities/review';
+import { getIsAuthenticated } from '@/entities/user';
 import { Header } from '@/features/header';
 import { Map } from '@/features/map';
 import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
 import { ReviewsList } from '@/features/reviews-list';
-import { AuthorizationStatus, FetchStatus } from '@/shared/model/enums';
+import { FetchStatus } from '@/shared/model/enums';
 import { Rating } from '@/shared/ui/rating';
 import { Spinner } from '@/shared/ui/spinner';
 
@@ -33,24 +40,16 @@ export const OfferPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const offer = useAppSelector((state) => state.offer);
-  const offerFetchStatus = useAppSelector((state) => state.offerFetchStatus);
+  const offer = useAppSelector(getOffer);
+  const offerFetchStatus = useAppSelector(getOfferFetchStatus);
 
-  const offers = useAppSelector((state) => state.offers);
-  const offersFetchStatus = useAppSelector((state) => state.offersFetchStatus);
+  const offers = useAppSelector(getOffers);
+  const offersFetchStatus = useAppSelector(getOffersFetchStatus);
 
-  const reviews = useAppSelector((state) =>
-    state.reviews
-      ?.slice(0, 10)
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
-  );
-  const reviewsFetchStatus = useAppSelector(
-    (state) => state.reviewsFetchStatus,
-  );
+  const reviews = useAppSelector(getLatest10Reviews);
+  const reviewsFetchStatus = useAppSelector(getReviewsFetchStatus);
 
-  const isAuthorizated = useAppSelector(
-    (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
-  );
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
 
   const firstThreeOffers = useMemo(
     () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
@@ -148,7 +147,7 @@ export const OfferPage = () => {
                     dangerouslySetInnerHTML={{ __html: offer.title }}
                   />
 
-                  {isAuthorizated && (
+                  {isAuthenticated && (
                     <button
                       className={classNames(
                         'offer__bookmark-button',
@@ -240,7 +239,7 @@ export const OfferPage = () => {
                   />
                 )}
 
-                {isAuthorizated && <ReviewForm onSubmit={onReviewSubmit} />}
+                {isAuthenticated && <ReviewForm onSubmit={onReviewSubmit} />}
               </div>
             </div>
             <section
