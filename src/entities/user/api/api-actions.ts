@@ -5,7 +5,7 @@ import { components } from '@/../types/schema';
 import { removeToken, saveToken } from '@/app/api/lib/token';
 import { ApiRoutes } from '@/app/api/model/api-routes';
 import { DispatchStateExtra } from '@/app/store/model/types';
-import { AuthorizationStatus } from '@/shared/model/enums';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
 
 import { setAuthorizationStatus, setUser } from '../model/reducer';
 import { User } from '../model/types';
@@ -13,7 +13,7 @@ import { User } from '../model/types';
 type AuthResponse = Required<components['schemas']['AuthInfoWithToken']>;
 
 export const checkLogin = createAsyncThunk<void, undefined, DispatchStateExtra>(
-  'user/checkLogin',
+  `${NameSpace.USER}/checkLogin`,
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setAuthorizationStatus(AuthorizationStatus.UNKNOWN));
 
@@ -34,7 +34,7 @@ export const checkLogin = createAsyncThunk<void, undefined, DispatchStateExtra>(
 );
 
 export const login = createAsyncThunk<void, User, DispatchStateExtra>(
-  'user/login',
+  `${NameSpace.USER}/login`,
   async ({ email, password }, { dispatch, extra: api }) => {
     dispatch(setAuthorizationStatus(AuthorizationStatus.UNKNOWN));
 
@@ -57,7 +57,7 @@ export const login = createAsyncThunk<void, User, DispatchStateExtra>(
 );
 
 export const logout = createAsyncThunk<void, undefined, DispatchStateExtra>(
-  'user/logout',
+  `${NameSpace.USER}/logout`,
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(ApiRoutes.LOGOUT);
     dispatch(setAuthorizationStatus(AuthorizationStatus.NO_AUTH));

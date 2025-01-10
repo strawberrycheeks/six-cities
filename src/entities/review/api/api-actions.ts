@@ -12,21 +12,24 @@ export const fetchOfferReviews = createAsyncThunk<
   void,
   string,
   DispatchStateExtra
->('review/fetchOfferReview', async (id, { dispatch, extra: api }) => {
-  dispatch(setReviewsFetchStatus(FetchStatus.LOADING));
+>(
+  `${NameSpace.REVIEW}/fetchOfferReview`,
+  async (id, { dispatch, extra: api }) => {
+    dispatch(setReviewsFetchStatus(FetchStatus.LOADING));
 
-  const { data } = await api.get<CommentGet[]>(`${ApiRoutes.REVIEWS}/${id}`);
+    const { data } = await api.get<CommentGet[]>(`${ApiRoutes.REVIEWS}/${id}`);
 
-  dispatch(setReviewsFetchStatus(FetchStatus.SUCCESS));
-  dispatch(setReviews(data));
-});
+    dispatch(setReviewsFetchStatus(FetchStatus.SUCCESS));
+    dispatch(setReviews(data));
+  },
+);
 
 export const addOfferReview = createAsyncThunk<
   void,
   CommentPost & { offerId: string },
   DispatchStateExtra
 >(
-  'review/addOfferReview',
+  `${NameSpace.REVIEW}/addOfferReview`,
   // TODO: уведомить пользователя, если не удалось
   async ({ offerId, comment, rating }, { dispatch, getState, extra: api }) => {
     const { status } = await api.post<CommentPost[]>(
