@@ -11,7 +11,7 @@ import {
   getOffersFetchStatus,
 } from '@/entities/offer-card';
 import { CitiesList } from '@/features/cities-list';
-import { CityPlacesList } from '@/features/city-places-list';
+import { CityPlacesList } from '@/features/city-places';
 import { Header } from '@/features/header';
 import { FetchStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
