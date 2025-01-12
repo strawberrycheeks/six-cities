@@ -10,7 +10,7 @@ import { Select } from '@/shared/ui/select';
 
 import { sortVariants } from '../model/consts';
 import { SortVariant } from '../model/types';
-import styles from './style.module.css';
+import styles from './styles.module.css';
 
 type CityPlacesProps = { offers: OfferPreview[]; city: City };
 
