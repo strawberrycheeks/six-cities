@@ -5,7 +5,7 @@ import { City } from '@/entities/city';
 import { OfferPreview } from '@/entities/offer-card';
 import { Map } from '@/features/map';
 import { OffersList } from '@/features/offers-list';
-import { EmptyState } from '@/shared/ui/empty-state';
+import { EmptyCityState } from '@/shared/ui/empty-city-state';
 import { Select } from '@/shared/ui/select';
 
 import { sortVariants } from '../model/consts';
@@ -37,7 +37,7 @@ export const CityPlacesList = (props: CityPlacesListProps) => {
   return (
     <div className="cities">
       {offers.length === 0 ? (
-        <EmptyState />
+        <EmptyCityState cityName={city.name} />
       ) : (
         <div
           className={classNames(
