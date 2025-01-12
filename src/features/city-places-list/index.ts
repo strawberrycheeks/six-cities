@@ -1,1 +1,0 @@
-export { CityPlacesList } from './ui';

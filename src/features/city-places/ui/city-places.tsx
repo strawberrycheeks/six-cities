@@ -12,9 +12,9 @@ import { sortVariants } from '../model/consts';
 import { SortVariant } from '../model/types';
 import styles from './styles.module.css';
 
-type CityPlacesListProps = { offers: OfferPreview[]; city: City };
+type CityPlacesProps = { offers: OfferPreview[]; city: City };
 
-export const CityPlacesList = (props: CityPlacesListProps) => {
+export const CityPlaces = (props: CityPlacesProps) => {
   const { offers, city } = props;
 
   const [sortVariant, setSortVariant] = useState<SortVariant>(
@@ -57,6 +57,7 @@ export const CityPlacesList = (props: CityPlacesListProps) => {
               options={sortVariants}
               label="Sort by"
             />
+
             <OffersList
               offers={sortedOffers}
               containerStyles="cities__places-list"

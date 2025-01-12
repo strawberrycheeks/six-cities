@@ -11,7 +11,7 @@ import {
   getOffersFetchStatus,
 } from '@/entities/offer-card';
 import { CitiesList } from '@/features/cities-list';
-import { CityPlacesList } from '@/features/city-places-list';
+import { CityPlaces } from '@/features/city-places';
 import { Header } from '@/features/header';
 import { FetchStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
@@ -60,7 +60,7 @@ export const MainPage = () => {
         {offersFetchStatus === FetchStatus.LOADING ? (
           <Spinner />
         ) : (
-          <CityPlacesList offers={offersByCity} city={city} />
+          <CityPlaces offers={offersByCity} city={city} />
         )}
       </main>
     </div>
