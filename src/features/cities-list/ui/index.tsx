@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '@/app/store/model/hooks';
-import { CityNames } from '@/entities/city';
+import { CityNames, getCity } from '@/entities/city';
 import { AppRoutes } from '@/shared/model/app-routes';
 
 export const CitiesList = () => {
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector(getCity);
 
   return (
     <ul className="locations__list tabs__list">

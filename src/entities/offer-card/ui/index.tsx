@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import { MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 
-import { setIsOfferFavorite } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
+import { getIsAuthenticated } from '@/entities/user';
 import { AppRoutes } from '@/shared/model/app-routes';
 import { Rating } from '@/shared/ui/rating';
 
+import { setIsOfferFavorite } from '../api/api-actions';
 import { OFFER_IMAGE_SIZE } from '../model/consts';
 import { OfferCardMode, OfferPreview } from '../model/types';
 
@@ -36,9 +36,7 @@ export const OfferCard = (props: OfferCardProps) => {
 
   const dispatch = useAppDispatch();
 
-  const isAuthorized = useAppSelector(
-    (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
-  );
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
 
   const isFullMode = mode === 'full';
 
@@ -95,7 +93,7 @@ export const OfferCard = (props: OfferCardProps) => {
             <b className="place-card__price-value">&euro; {price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {isAuthorized && (
+          {isAuthenticated && (
             <button
               className={classNames('place-card__bookmark-button', 'button', {
                 ['place-card__bookmark-button--active']: isFavorite,

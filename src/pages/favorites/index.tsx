@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
 
-import { clearOffers } from '@/app/store/model/actions';
-import { fetchFavoriteOffers } from '@/app/store/model/async-thunks';
-import { FetchStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
+import {
+  clearOffers,
+  fetchFavoriteOffers,
+  getOffers,
+  getOffersFetchStatus,
+} from '@/entities/offer-card';
 import { FavoriteOffersList } from '@/features/favorite-offers-list';
 import { Footer } from '@/features/footer';
 import { Header } from '@/features/header';
+import { FetchStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
 
 export const FavoritesPage = () => {
   const dispatch = useAppDispatch();
 
-  const offers = useAppSelector((state) => state.offers);
-  const offersFetchStatus = useAppSelector((state) => state.offersFetchStatus);
+  const offers = useAppSelector(getOffers);
+  const offersFetchStatus = useAppSelector(getOffersFetchStatus);
 
   useEffect(() => {
     dispatch(fetchFavoriteOffers());

@@ -1,8 +1,11 @@
 import classNames from 'classnames';
 
-import { setActiveOfferId } from '@/app/store/model/actions';
 import { useAppDispatch } from '@/app/store/model/hooks';
-import { OfferCard, OfferPreview } from '@/entities/offer-card';
+import {
+  OfferCard,
+  OfferPreview,
+  setActiveOfferId,
+} from '@/entities/offer-card';
 
 type OffersListProps = {
   offers: OfferPreview[];

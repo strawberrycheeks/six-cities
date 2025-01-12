@@ -2,14 +2,18 @@ import classNames from 'classnames';
 import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { clearOffers, setCity } from '@/app/store/model/actions';
-import { fetchOffers } from '@/app/store/model/async-thunks';
-import { FetchStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
-import { cities, CityName, CityNames } from '@/entities/city';
+import { cities, CityName, CityNames, getCity, setCity } from '@/entities/city';
+import {
+  clearOffers,
+  fetchOffers,
+  getOffers,
+  getOffersFetchStatus,
+} from '@/entities/offer-card';
 import { CitiesList } from '@/features/cities-list';
 import { CityPlacesList } from '@/features/city-places-list';
 import { Header } from '@/features/header';
+import { FetchStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
 
 export const MainPage = () => {
@@ -17,10 +21,10 @@ export const MainPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const city = useAppSelector((state) => state.city);
+  const city = useAppSelector(getCity);
 
-  const offers = useAppSelector((state) => state.offers);
-  const offersFetchStatus = useAppSelector((state) => state.offersFetchStatus);
+  const offers = useAppSelector(getOffers);
+  const offersFetchStatus = useAppSelector(getOffersFetchStatus);
 
   useEffect(() => {
     const cityToSet = location.hash.slice(1) as CityName;

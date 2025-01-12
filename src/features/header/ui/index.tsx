@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { logout } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
+import { getIsAuthenticated, getUser, logout } from '@/entities/user';
 import { AppRoutes } from '@/shared/model/app-routes';
 
 type HeaderProps = {
@@ -14,11 +13,9 @@ export const Header = (props: HeaderProps) => {
 
   const dispatch = useAppDispatch();
 
-  const isAuthorizated = useAppSelector(
-    (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
-  );
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
 
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(getUser);
 
   return (
     <header className="header">
@@ -39,7 +36,7 @@ export const Header = (props: HeaderProps) => {
           {!isOnlyLogo && (
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {isAuthorizated && (
+                {isAuthenticated && (
                   <li className="header__nav-item user">
                     <Link
                       className="header__nav-link header__nav-link--profile"
@@ -59,7 +56,7 @@ export const Header = (props: HeaderProps) => {
                   </li>
                 )}
 
-                {isAuthorizated ? (
+                {isAuthenticated ? (
                   <li className="header__nav-item">
                     <a
                       className="header__nav-link"

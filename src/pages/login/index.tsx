@@ -1,20 +1,16 @@
 import { FormEventHandler, useMemo } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
-import { login } from '@/app/store/model/async-thunks';
-import { AuthorizationStatus } from '@/app/store/model/enums';
 import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
 import { CityNames } from '@/entities/city';
-import { User } from '@/entities/user';
+import { getIsAuthenticated, login, User } from '@/entities/user';
 import { Header } from '@/features/header';
 import { AppRoutes } from '@/shared/model/app-routes';
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
 
-  const isAuthorized = useAppSelector(
-    (state) => state.authorizationStatus === AuthorizationStatus.AUTH,
-  );
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
 
   const onSubmit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -34,7 +30,7 @@ export const LoginPage = () => {
     [],
   );
 
-  if (isAuthorized) {
+  if (isAuthenticated) {
     return <Navigate to={AppRoutes.HOME} />;
   }
 
