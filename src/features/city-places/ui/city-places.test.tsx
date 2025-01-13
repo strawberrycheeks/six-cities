@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { initAsyncActionsStore } from '@/app/lib/mocks';
-import { cities } from '@/entities/city';
+import { CITY_LIST } from '@/entities/city';
 import { makeOffers } from '@/entities/offer-card/lib/mocks';
-import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
 
-import { SortVariant } from '../model/types';
+import { SortVariant } from '../types';
 import { CityPlaces } from './city-places';
 
 describe('<CityPlaces />', () => {
@@ -32,7 +32,7 @@ describe('<CityPlaces />', () => {
     const component = (
       <Provider store={store}>
         <BrowserRouter>
-          <CityPlaces city={cities.Paris} offers={offers} />
+          <CityPlaces city={CITY_LIST.Paris} offers={offers} />
         </BrowserRouter>
       </Provider>
     );
@@ -47,7 +47,7 @@ describe('<CityPlaces />', () => {
     const component = (
       <Provider store={store}>
         <BrowserRouter>
-          <CityPlaces city={cities.Paris} offers={[]} />
+          <CityPlaces city={CITY_LIST.Paris} offers={[]} />
         </BrowserRouter>
       </Provider>
     );
@@ -61,7 +61,7 @@ describe('<CityPlaces />', () => {
     const component = (
       <Provider store={store}>
         <BrowserRouter>
-          <CityPlaces city={cities.Paris} offers={offers} />
+          <CityPlaces city={CITY_LIST.Paris} offers={offers} />
         </BrowserRouter>
       </Provider>
     );
@@ -80,7 +80,7 @@ describe('<CityPlaces />', () => {
     const component = (
       <Provider store={store}>
         <BrowserRouter>
-          <CityPlaces city={cities.Paris} offers={offers} />
+          <CityPlaces city={CITY_LIST.Paris} offers={offers} />
         </BrowserRouter>
       </Provider>
     );
@@ -113,7 +113,7 @@ describe('<CityPlaces />', () => {
     const component = (
       <Provider store={store}>
         <BrowserRouter>
-          <CityPlaces city={cities.Paris} offers={offers} />
+          <CityPlaces city={CITY_LIST.Paris} offers={offers} />
         </BrowserRouter>
       </Provider>
     );
@@ -146,7 +146,7 @@ describe('<CityPlaces />', () => {
     const component = (
       <Provider store={store}>
         <BrowserRouter>
-          <CityPlaces city={cities.Paris} offers={offers} />
+          <CityPlaces city={CITY_LIST.Paris} offers={offers} />
         </BrowserRouter>
       </Provider>
     );

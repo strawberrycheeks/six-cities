@@ -1,11 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { citySlice } from '@/entities/city';
-import { offerCardSlice } from '@/entities/offer-card';
-import { reviewSlice } from '@/entities/review';
-import { snackbarSlice } from '@/entities/snackbar';
-import { userSlice } from '@/entities/user';
-import { NameSpace } from '@/shared/model/enums';
+import { citySlice } from '@/entities/city/model/reducer';
+import { offerCardSlice } from '@/entities/offer-card/model/reducer';
+import { reviewSlice } from '@/entities/review/model/reducer';
+import { snackbarSlice } from '@/entities/snackbar/model/reducer';
+import { userSlice } from '@/entities/user/model/reducer';
+
+import { NameSpace } from '../../shared/model/constants';
 
 export const reducer = combineReducers({
   [NameSpace.OFFER]: offerCardSlice.reducer,

@@ -1,5 +1,5 @@
-import { State } from '@/app/store/model/types';
-import { NameSpace } from '@/shared/model/enums';
+import { State } from '@/app/store/types';
+import { NameSpace } from '@/shared/model/constants';
 
 export const getLatest10Reviews = (state: State) =>
   state[NameSpace.REVIEW].reviews

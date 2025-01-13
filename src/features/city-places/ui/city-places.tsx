@@ -2,21 +2,18 @@ import classNames from 'classnames';
 import { useMemo, useState } from 'react';
 
 import { City } from '@/entities/city';
-import { OfferPreview } from '@/entities/offer-card';
-import { Map } from '@/features/map';
-import { OffersList } from '@/features/offers-list';
+import { Map } from '@/entities/map';
+import { OfferPreview, OffersList } from '@/entities/offer-card';
 import { EmptyCityState } from '@/shared/ui/empty-city-state';
 import { Select } from '@/shared/ui/select';
 
-import { sortVariants } from '../model/consts';
-import { SortVariant } from '../model/types';
-import styles from './styles.module.css';
+import { sortVariants } from '../consts';
+import { SortVariant } from '../types';
+import styles from './style.module.css';
 
 type CityPlacesProps = { offers: OfferPreview[]; city: City };
 
-export const CityPlaces = (props: CityPlacesProps) => {
-  const { offers, city } = props;
-
+export const CityPlaces = ({ offers, city }: CityPlacesProps) => {
   const [sortVariant, setSortVariant] = useState<SortVariant>(
     SortVariant.POPULAR,
   );

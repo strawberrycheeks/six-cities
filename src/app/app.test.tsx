@@ -2,16 +2,16 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 
-import { cities } from '@/entities/city';
+import { CITY_LIST } from '@/entities/city';
 import { makeOfferMaximum, makeOffers } from '@/entities/offer-card/lib/mocks';
 import { makeReviews } from '@/entities/review/lib/mocks';
 import { makeUser } from '@/entities/user/lib/mocks';
 import {
-  AppRoutes,
   AuthorizationStatus,
   FetchStatus,
   NameSpace,
-} from '@/shared/model/enums';
+} from '@/shared/model/constants';
+import { AppRoute } from '@/shared/model/constants';
 
 import { App } from './app';
 import { HistoryRouter } from './history-router';
@@ -30,7 +30,7 @@ describe('<App />', () => {
         user: makeUser(),
       },
       [NameSpace.CITY]: {
-        city: cities.Paris,
+        city: CITY_LIST.Paris,
       },
       [NameSpace.OFFER]: {
         offers: makeOffers(),
@@ -59,7 +59,7 @@ describe('<App />', () => {
       </Provider>
     );
 
-    mockHistory.push(AppRoutes.HOME);
+    mockHistory.push(AppRoute.HOME);
 
     const { container } = render(component);
 
@@ -86,7 +86,7 @@ describe('<App />', () => {
       </Provider>
     );
 
-    mockHistory.push(AppRoutes.LOGIN);
+    mockHistory.push(AppRoute.LOGIN);
 
     const { container } = render(component);
 
@@ -112,7 +112,7 @@ describe('<App />', () => {
       </Provider>
     );
 
-    mockHistory.push(AppRoutes.FAVORITES);
+    mockHistory.push(AppRoute.FAVORITES);
 
     const { container } = render(component);
 
@@ -129,7 +129,7 @@ describe('<App />', () => {
       </Provider>
     );
 
-    mockHistory.push(AppRoutes.FAVORITES);
+    mockHistory.push(AppRoute.FAVORITES);
 
     const { container } = render(component);
 
@@ -146,7 +146,7 @@ describe('<App />', () => {
       </Provider>
     );
 
-    mockHistory.push(`${AppRoutes.OFFER}/1`);
+    mockHistory.push(`${AppRoute.OFFER}/1`);
 
     const { container } = render(component);
 
@@ -162,12 +162,11 @@ describe('<App />', () => {
       </Provider>
     );
 
-    mockHistory.push(AppRoutes.OFFER);
+    mockHistory.push(AppRoute.OFFER);
 
     render(component);
 
-    expect(screen.getByText('404')).toBeInTheDocument();
-    expect(screen.getByText('not found')).toBeInTheDocument();
+    expect(screen.getByText('404 — Page not found')).toBeInTheDocument();
   });
 
   it('should render Error404Page route does not exist', () => {
@@ -183,7 +182,6 @@ describe('<App />', () => {
 
     render(component);
 
-    expect(screen.getByText('404')).toBeInTheDocument();
-    expect(screen.getByText('not found')).toBeInTheDocument();
+    expect(screen.getByText('404 — Page not found')).toBeInTheDocument();
   });
 });

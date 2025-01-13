@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/app/store/hooks';
 
 import { removeSnackbarItem } from '../model/reducer';
-import { SnackbarItem } from '../model/types';
+import { SnackbarItem } from '../types';
 import styles from './styles.module.css';
 
 export const Snackbar = ({ id, message }: SnackbarItem) => {

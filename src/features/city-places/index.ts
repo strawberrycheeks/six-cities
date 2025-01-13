@@ -1,1 +1,1 @@
-export { CityPlaces } from './ui/city-places';
+export { CityPlaces } from './ui';

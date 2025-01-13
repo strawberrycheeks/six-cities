@@ -1,8 +1,8 @@
 import faker from 'faker';
 
-import { cities, CityNames } from '@/entities/city';
+import { CITY_LIST, CityNames } from '@/entities/city';
 
-import { OfferMaximum, OfferPreview } from '../model/types';
+import { OfferMaximum, OfferPreview } from '../types';
 
 export const makeOfferPreview = (): OfferPreview => ({
   id: faker.datatype.uuid(),
@@ -19,7 +19,7 @@ export const makeOfferPreview = (): OfferPreview => ({
   },
   previewImage: faker.image.imageUrl(),
   city: {
-    name: cities[faker.random.arrayElement(CityNames)].name,
+    name: CITY_LIST[faker.random.arrayElement(CityNames)].name,
     location: {
       latitude: faker.datatype.number(),
       longitude: faker.datatype.number(),

@@ -8,7 +8,8 @@ import { FavoritesPage } from '@/pages/favorites';
 import { LoginPage } from '@/pages/login';
 import { MainPage } from '@/pages/main';
 import { OfferPage } from '@/pages/offer';
-import { AppRoutes, AuthorizationStatus } from '@/shared/model/enums';
+import { AppRoute } from '@/shared/model/constants';
+import { AuthorizationStatus } from '@/shared/model/constants';
 import { Spinner } from '@/shared/ui/spinner';
 
 import { PrivateRoute } from './private-route';
@@ -27,18 +28,18 @@ export const App = () => {
   ) : (
     <>
       <Routes>
-        <Route path={AppRoutes.HOME} element={<MainPage />} />
-        <Route path={AppRoutes.LOGIN} element={<LoginPage />} />
+        <Route path={AppRoute.HOME} element={<MainPage />} />
+        <Route path={AppRoute.LOGIN} element={<LoginPage />} />
         <Route
-          path={AppRoutes.FAVORITES}
+          path={AppRoute.FAVORITES}
           element={
             <PrivateRoute>
               <FavoritesPage />
             </PrivateRoute>
           }
         />
-        <Route path={`${AppRoutes.OFFER}/:id`} element={<OfferPage />} />
-        <Route path={AppRoutes.NOT_FOUND} element={<Error404Page />} />
+        <Route path={`${AppRoute.OFFER}/:id`} element={<OfferPage />} />
+        <Route path={AppRoute.NOT_FOUND} element={<Error404Page />} />
       </Routes>
       <SnackbarContainer />
     </>

@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/app/store/model/hooks';
+import { useAppSelector } from '@/app/store/hooks';
 
 import { getSnackbarItems } from '../model/selectors';
 import { Snackbar } from './snackbar';

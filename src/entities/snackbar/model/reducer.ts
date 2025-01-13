@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { NameSpace } from '@/shared/model/enums';
+import { NameSpace } from '@/shared/model/constants';
 
-import { MAX_ITEMS } from './consts';
-import { SnackbarItem } from './types';
+import { MAX_ITEMS } from '../constants';
+import { SnackbarItem } from '../types';
 
 type SnackbarState = {
   items: SnackbarItem[];

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
 
-import { AuthInfo } from './types';
+import { User } from '..';
 
-export type UserState = {
-  user?: AuthInfo;
+type UserState = {
+  user?: User;
   authorizationStatus: AuthorizationStatus;
 };
 
@@ -17,7 +17,7 @@ export const userSlice = createSlice({
   name: NameSpace.USER,
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<AuthInfo | undefined>) => {
+    setUser: (state, action: PayloadAction<User | undefined>) => {
       state.user = action.payload;
     },
     setAuthorizationStatus: (

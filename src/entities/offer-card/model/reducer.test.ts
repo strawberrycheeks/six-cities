@@ -1,4 +1,4 @@
-import { FetchStatus } from '@/shared/model/enums';
+import { FetchStatus } from '@/shared/model/constants';
 
 import { makeOfferMaximum, makeOffers } from '../lib/mocks';
 import {

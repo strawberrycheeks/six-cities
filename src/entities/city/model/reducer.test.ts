@@ -1,12 +1,12 @@
-import { cities } from './consts';
+import { CITY_LIST } from '../constants';
 import { citySlice, setCity } from './reducer';
 
 describe('city slice', () => {
   it('should correct change city', () => {
-    const initialState = { city: cities.Paris };
-    const expectedState = { city: cities.Brussels };
+    const initialState = { city: CITY_LIST.Paris };
+    const expectedState = { city: CITY_LIST.Brussels };
 
-    const result = citySlice.reducer(initialState, setCity(cities.Brussels));
+    const result = citySlice.reducer(initialState, setCity(CITY_LIST.Brussels));
 
     expect(result).toEqual(expectedState);
   });

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StatusCodes } from 'http-status-codes';
 
-import { ApiRoutes } from '@/app/api/model/api-routes';
-import { DispatchStateExtra, State } from '@/app/store/model/types';
-import { FetchStatus, NameSpace } from '@/shared/model/enums';
+import { ApiRoute } from '@/app/api/routes';
+import { DispatchStateExtra, State } from '@/app/store/types';
+import { FetchStatus, NameSpace } from '@/shared/model/constants';
 
 import {
   setOffer,
@@ -11,7 +11,7 @@ import {
   setOffers,
   setOffersLoadingStatus,
 } from '../model/reducer';
-import { OfferMaximum, OfferPreview } from '../model/types';
+import { OfferMaximum, OfferPreview } from '../types';
 
 export const fetchOffers = createAsyncThunk<
   void,
@@ -20,7 +20,7 @@ export const fetchOffers = createAsyncThunk<
 >(`${NameSpace.OFFER}/fetch`, async (_arg, { dispatch, extra: api }) => {
   dispatch(setOffersLoadingStatus(FetchStatus.LOADING));
 
-  const { data } = await api.get<OfferPreview[]>(ApiRoutes.OFFERS);
+  const { data } = await api.get<OfferPreview[]>(ApiRoute.OFFERS);
 
   dispatch(setOffersLoadingStatus(FetchStatus.SUCCESS));
   dispatch(setOffers(data));
@@ -32,7 +32,7 @@ export const fetchOffer = createAsyncThunk<void, string, DispatchStateExtra>(
     dispatch(setOfferLoadingStatus(FetchStatus.LOADING));
 
     const { status, data } = await api.get<OfferMaximum>(
-      `${ApiRoutes.OFFERS}/${id}`,
+      `${ApiRoute.OFFERS}/${id}`,
     );
 
     if (status === Number(StatusCodes.NOT_FOUND)) {
@@ -55,7 +55,7 @@ export const fetchOffersNearby = createAsyncThunk<
     dispatch(setOffersLoadingStatus(FetchStatus.LOADING));
 
     const { data } = await api.get<OfferPreview[]>(
-      `${ApiRoutes.OFFERS}/${id}/nearby`,
+      `${ApiRoute.OFFERS}/${id}/nearby`,
     );
 
     dispatch(setOffersLoadingStatus(FetchStatus.SUCCESS));
@@ -72,7 +72,7 @@ export const fetchFavoriteOffers = createAsyncThunk<
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setOffersLoadingStatus(FetchStatus.LOADING));
 
-    const { data } = await api.get<OfferPreview[]>(ApiRoutes.FAVORITE);
+    const { data } = await api.get<OfferPreview[]>(ApiRoute.FAVORITE);
 
     dispatch(setOffersLoadingStatus(FetchStatus.SUCCESS));
     dispatch(setOffers(data));
@@ -90,7 +90,7 @@ export const setIsOfferFavorite = createAsyncThunk<
     { dispatch, extra: api, getState },
   ) => {
     const { data } = await api.post<OfferMaximum>(
-      `${ApiRoutes.FAVORITE}/${offerId}/${Number(isFavorite)}`,
+      `${ApiRoute.FAVORITE}/${offerId}/${Number(isFavorite)}`,
     );
 
     if (context === 'offer') {

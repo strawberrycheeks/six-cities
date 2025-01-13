@@ -2,34 +2,36 @@ import classNames from 'classnames';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
-import { cities } from '@/entities/city';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { CITY_LIST } from '@/entities/city';
+import { Header } from '@/entities/header';
+import { Map } from '@/entities/map';
 import {
   clearOffer,
   clearOffers,
   fetchOffer,
   fetchOffersNearby,
+  setActiveOfferId,
+  setIsOfferFavorite,
+} from '@/entities/offer-card';
+import {
   getOffer,
   getOfferFetchStatus,
   getOffers,
   getOffersFetchStatus,
-  setActiveOfferId,
-  setIsOfferFavorite,
-} from '@/entities/offer-card';
+} from '@/entities/offer-card/model/selectors';
+import { OtherPlacesNearby } from '@/entities/offer-card/ui/other-places-nearby';
 import {
   addOfferReview,
   clearReviews,
   fetchOfferReviews,
   getLatest10Reviews,
   getReviewsFetchStatus,
+  ReviewsList,
 } from '@/entities/review';
 import { getIsAuthenticated } from '@/entities/user';
-import { Header } from '@/features/header';
-import { Map } from '@/features/map';
-import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
-import { ReviewsList } from '@/features/reviews-list';
-import { FetchStatus } from '@/shared/model/enums';
+import { FetchStatus } from '@/shared/model/constants';
 import { Rating } from '@/shared/ui/rating';
 import { Spinner } from '@/shared/ui/spinner';
 
@@ -250,7 +252,7 @@ export const OfferPage = () => {
               className={classNames('map', 'container', styles.offerMap)}
             >
               <Map
-                city={cities[offer.city.name]}
+                city={CITY_LIST[offer.city.name]}
                 points={currentWithFirstThreeOffersNearby}
               />
             </section>
@@ -260,7 +262,7 @@ export const OfferPage = () => {
           {offersFetchStatus !== FetchStatus.SUCCESS || !offers ? (
             <Spinner />
           ) : (
-            <OffersNearbyList offers={firstFourOffersNearby} />
+            <OtherPlacesNearby offers={firstFourOffersNearby} />
           )}
         </div>
       </main>

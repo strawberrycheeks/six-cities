@@ -6,9 +6,7 @@ type ReviewFormProps = {
   onSubmit: ({ rating, comment }: { rating: number; comment: string }) => void;
 };
 
-export const ReviewForm = (props: ReviewFormProps) => {
-  const { onSubmit: submit } = props;
-
+export const ReviewForm = ({ onSubmit: submit }: ReviewFormProps) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 

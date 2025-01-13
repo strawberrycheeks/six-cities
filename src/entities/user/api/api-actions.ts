@@ -2,15 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StatusCodes } from 'http-status-codes';
 
 import { components } from '@/../types/schema';
-import { removeToken, saveToken } from '@/app/api/lib/token';
-import { ApiRoutes } from '@/app/api/model/api-routes';
+import { ApiRoute } from '@/app/api/routes';
+import { removeToken, saveToken } from '@/app/api/token';
 import { isAxiosError } from '@/app/lib/is-axios-error';
-import { DispatchStateExtra } from '@/app/store/model/types';
+import { DispatchStateExtra } from '@/app/store/types';
 import { showSnackbar } from '@/entities/snackbar';
-import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
 
 import { setAuthorizationStatus, setUser } from '../model/reducer';
-import { User } from '../model/types';
+import { UserDto } from '../types';
 
 type AuthResponse = Required<components['schemas']['AuthInfoWithToken']>;
 
@@ -19,7 +19,7 @@ export const checkLogin = createAsyncThunk<void, undefined, DispatchStateExtra>(
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setAuthorizationStatus(AuthorizationStatus.UNKNOWN));
 
-    const response = await api.get<AuthResponse>(ApiRoutes.LOGIN);
+    const response = await api.get<AuthResponse>(ApiRoute.LOGIN);
     const {
       status,
       data: { token, ...user },
@@ -36,12 +36,12 @@ export const checkLogin = createAsyncThunk<void, undefined, DispatchStateExtra>(
   },
 );
 
-export const login = createAsyncThunk<void, User, DispatchStateExtra>(
+export const login = createAsyncThunk<void, UserDto, DispatchStateExtra>(
   `${NameSpace.USER}/login`,
   async ({ email, password }, { dispatch, extra: api }) => {
     dispatch(setAuthorizationStatus(AuthorizationStatus.UNKNOWN));
 
-    const { status, data } = await api.post<AuthResponse>(ApiRoutes.LOGIN, {
+    const { status, data } = await api.post<AuthResponse>(ApiRoute.LOGIN, {
       email,
       password,
     });
@@ -61,6 +61,7 @@ export const login = createAsyncThunk<void, User, DispatchStateExtra>(
       if (errorMessage) {
         showSnackbar(errorMessage);
       }
+
       dispatch(setAuthorizationStatus(AuthorizationStatus.NO_AUTH));
     }
   },
@@ -69,7 +70,7 @@ export const login = createAsyncThunk<void, User, DispatchStateExtra>(
 export const logout = createAsyncThunk<void, undefined, DispatchStateExtra>(
   `${NameSpace.USER}/logout`,
   async (_arg, { dispatch, extra: api }) => {
-    await api.delete(ApiRoutes.LOGOUT);
+    await api.delete(ApiRoute.LOGOUT);
     dispatch(setAuthorizationStatus(AuthorizationStatus.NO_AUTH));
     dispatch(setUser(undefined));
     removeToken();

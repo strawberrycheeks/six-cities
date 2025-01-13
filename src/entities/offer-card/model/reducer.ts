@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FetchStatus, NameSpace } from '@/shared/model/enums';
+import { FetchStatus, NameSpace } from '@/shared/model/constants';
 
-import { OfferMaximum, OfferPreview } from './types';
+import { OfferMaximum, OfferPreview } from '../types';
 
-export type OfferState = {
+type OfferState = {
   offers?: OfferPreview[];
   offersFetchStatus: FetchStatus;
 

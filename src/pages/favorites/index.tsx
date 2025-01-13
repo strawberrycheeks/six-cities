@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { Header } from '@/entities/header';
 import {
   clearOffers,
   fetchFavoriteOffers,
   getOffers,
   getOffersFetchStatus,
+  OffersByCities,
 } from '@/entities/offer-card';
-import { FavoriteOffersList } from '@/features/favorite-offers-list';
-import { Footer } from '@/features/footer';
-import { Header } from '@/features/header';
-import { FetchStatus } from '@/shared/model/enums';
+import { FetchStatus } from '@/shared/model/constants';
 import { Spinner } from '@/shared/ui/spinner';
 
 export const FavoritesPage = () => {
@@ -30,6 +29,7 @@ export const FavoritesPage = () => {
   return (
     <div className="page">
       <Header />
+
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -37,12 +37,23 @@ export const FavoritesPage = () => {
             {offersFetchStatus !== FetchStatus.SUCCESS || !offers ? (
               <Spinner />
             ) : (
-              <FavoriteOffersList offers={offers} />
+              <OffersByCities offers={offers} />
             )}
           </section>
         </div>
       </main>
-      <Footer />
+
+      <footer className="footer container">
+        <a className="footer__logo-link" href="main.html">
+          <img
+            className="footer__logo"
+            src="img/logo.svg"
+            alt="6 cities logo"
+            width="64"
+            height="33"
+          />
+        </a>
+      </footer>
     </div>
   );
 };
