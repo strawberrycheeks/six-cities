@@ -42,6 +42,9 @@ describe('<App />', () => {
         reviews: makeReviews(),
         reviewsFetchStatus: FetchStatus.SUCCESS,
       },
+      [NameSpace.SNACKBAR]: {
+        items: [],
+      },
     });
 
     mockHistory = createMemoryHistory();
@@ -70,6 +73,9 @@ describe('<App />', () => {
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
       },
+      [NameSpace.SNACKBAR]: {
+        items: [],
+      },
     });
 
     const component = (
@@ -92,6 +98,9 @@ describe('<App />', () => {
     store = mockStoreCreator({
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      },
+      [NameSpace.SNACKBAR]: {
+        items: [],
       },
     });
 

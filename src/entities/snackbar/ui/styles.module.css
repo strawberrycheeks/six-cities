@@ -1,0 +1,18 @@
+.container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.item {
+  background-color: #4481c3;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  margin-left: 12px;
+  padding: 8px;
+}
