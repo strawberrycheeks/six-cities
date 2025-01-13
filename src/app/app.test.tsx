@@ -166,7 +166,8 @@ describe('<App />', () => {
 
     render(component);
 
-    expect(screen.getByText('404 — Page not found')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(screen.getByText('not found')).toBeInTheDocument();
   });
 
   it('should render Error404Page route does not exist', () => {
@@ -182,6 +183,7 @@ describe('<App />', () => {
 
     render(component);
 
-    expect(screen.getByText('404 — Page not found')).toBeInTheDocument();
+    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(screen.getByText('not found')).toBeInTheDocument();
   });
 });

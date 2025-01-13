@@ -5,11 +5,11 @@ import { NameSpace } from '@/shared/model/enums';
 import { MAX_ITEMS } from './consts';
 import { SnackbarItem } from './types';
 
-export type State = {
+type SnackbarState = {
   items: SnackbarItem[];
 };
 
-const initialState: State = {
+const initialState: SnackbarState = {
   items: [],
 };
 

@@ -12,7 +12,7 @@ export const LoginPage = () => {
 
   const isAuthenticated = useAppSelector(getIsAuthenticated);
 
-  const onSubmit: FormEventHandler = (e) => {
+  const handleSubmit: FormEventHandler = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
@@ -42,12 +42,7 @@ export const LoginPage = () => {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form
-              className="login__form form"
-              action="#"
-              method="post"
-              onSubmit={onSubmit}
-            >
+            <form className="login__form form" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
