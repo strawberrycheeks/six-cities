@@ -1,4 +1,4 @@
-import { dateToMonthWordYear, dateToYearMonthDay } from './date-formatter';
+import { dateToMonthWordYear, dateToYearMonthDay } from './date';
 
 describe('date.ts', () => {
   it('Date to yyyy-mm-dd', () => {

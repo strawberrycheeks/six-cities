@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Spinner } from '.';
+import { Spinner } from './spinner';
 import styles from './styles.module.css';
 
 describe('<Spinner />', () => {

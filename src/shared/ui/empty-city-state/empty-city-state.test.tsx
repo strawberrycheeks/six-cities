@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { EmptyCityState } from '.';
+import { EmptyCityState } from './empty-city-state';
 
 describe('<EmptyCityState />', () => {
   it('should render correctly', () => {

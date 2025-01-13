@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { Rating } from '.';
+import { Rating } from './rating';
 
 describe('<Rating />', () => {
   it('should render correctly', () => {

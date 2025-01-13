@@ -8,9 +8,12 @@ type SelectProps<T> = {
   label: string;
 };
 
-export const Select = <T extends string>(props: SelectProps<T>) => {
-  const { options, value, onChange, label } = props;
-
+export const Select = <T extends string>({
+  options,
+  value,
+  onChange,
+  label,
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const chooseOption = (variant: T) => {

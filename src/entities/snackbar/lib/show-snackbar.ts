@@ -1,5 +1,5 @@
 import { store } from '@/app/store';
-import { getRandomId } from '@/shared/lib/random-id';
+import { getRandomId } from '@/shared/lib/get-random-id';
 
 import { SNACKBAR_TIMEOUT } from '../model/consts';
 import { addSnackbarItem, removeSnackbarItem } from '../model/reducer';
