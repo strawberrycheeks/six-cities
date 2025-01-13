@@ -5,6 +5,8 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import { City } from '@/entities/city';
 
+import { DEFAULT_ZOOM, MAX_ZOOM } from './constants';
+
 export const useMap = (
   mapRef: MutableRefObject<HTMLDivElement | null>,
   city: City,
@@ -19,7 +21,7 @@ export const useMap = (
           lat: city.latitude,
           lng: city.longitude,
         },
-        zoom: 10,
+        zoom: DEFAULT_ZOOM,
       });
 
       const layer = new TileLayer(
@@ -27,7 +29,7 @@ export const useMap = (
         {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          maxZoom: 19,
+          maxZoom: MAX_ZOOM,
         },
       );
 
@@ -37,6 +39,10 @@ export const useMap = (
       isRenderedRef.current = true;
     }
   }, [mapRef, city]);
+
+  useEffect(() => {
+    map?.flyTo([city.latitude, city.longitude], DEFAULT_ZOOM);
+  }, [city]);
 
   return map;
 };
