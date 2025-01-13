@@ -1,3 +1,11 @@
+export const enum AppRoutes {
+  HOME = '/',
+  LOGIN = '/login',
+  FAVORITES = '/favorites',
+  OFFER = '/offer',
+  NOT_FOUND = '*',
+}
+
 export const enum AuthorizationStatus {
   AUTH = 'AUTH',
   NO_AUTH = 'NO_AUTH',

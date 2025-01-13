@@ -8,12 +8,11 @@ import { FavoritesPage } from '@/pages/favorites';
 import { LoginPage } from '@/pages/login';
 import { MainPage } from '@/pages/main';
 import { OfferPage } from '@/pages/offer';
-import { AppRoutes } from '@/shared/model/app-routes';
-import { AuthorizationStatus } from '@/shared/model/enums';
+import { AppRoutes, AuthorizationStatus } from '@/shared/model/enums';
 import { Spinner } from '@/shared/ui/spinner';
 
 import { PrivateRoute } from './private-route';
-import { useAppDispatch, useAppSelector } from './store/model/hooks';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 
 export const App = () => {
   const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
-import { BASE_URL, STATUS_CODE_MAPPING, TIMEOUT } from '../model/consts';
+import { BASE_URL, STATUS_CODE_MAPPING, TIMEOUT } from '../model/constants';
 import { getToken } from './token';
 
-const shouldDisplayError = (response: AxiosResponse) =>
+export const shouldDisplayError = (response: AxiosResponse) =>
   STATUS_CODE_MAPPING[response.status];
 
 export const createAPI = (): AxiosInstance => {

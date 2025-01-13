@@ -6,8 +6,8 @@ import { cities } from '@/entities/city';
 import { makeOfferMaximum, makeOffers } from '@/entities/offer-card/lib/mocks';
 import { makeReviews } from '@/entities/review/lib/mocks';
 import { makeUser } from '@/entities/user/lib/mocks';
-import { AppRoutes } from '@/shared/model/app-routes';
 import {
+  AppRoutes,
   AuthorizationStatus,
   FetchStatus,
   NameSpace,

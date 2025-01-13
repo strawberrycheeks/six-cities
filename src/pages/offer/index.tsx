@@ -51,11 +51,6 @@ export const OfferPage = () => {
 
   const isAuthenticated = useAppSelector(getIsAuthenticated);
 
-  const firstThreeOffers = useMemo(
-    () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
-    [offer, offers],
-  );
-
   useEffect(() => {
     if (!id) return;
 
@@ -78,6 +73,15 @@ export const OfferPage = () => {
       dispatch(clearReviews());
     };
   }, [dispatch, id, offer]);
+
+  const currentWithFirstThreeOffersNearby = useMemo(
+    () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
+    [offer, offers],
+  );
+  const firstFourOffersNearby = useMemo(
+    () => offers?.slice(0, 4) ?? [],
+    [offers],
+  );
 
   const onReviewSubmit = useCallback(
     ({ rating, comment }: { comment: string; rating: number }) => {
@@ -245,7 +249,10 @@ export const OfferPage = () => {
             <section
               className={classNames('map', 'container', styles.offerMap)}
             >
-              <Map city={cities[offer.city.name]} points={firstThreeOffers} />
+              <Map
+                city={cities[offer.city.name]}
+                points={currentWithFirstThreeOffersNearby}
+              />
             </section>
           </section>
         )}
@@ -253,7 +260,7 @@ export const OfferPage = () => {
           {offersFetchStatus !== FetchStatus.SUCCESS || !offers ? (
             <Spinner />
           ) : (
-            <OffersNearbyList offers={offers} />
+            <OffersNearbyList offers={firstFourOffersNearby} />
           )}
         </div>
       </main>

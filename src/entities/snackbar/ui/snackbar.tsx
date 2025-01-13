@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/app/store/model/hooks';
+import { useAppDispatch } from '@/app/store/hooks';
 
 import { removeSnackbarItem } from '../model/reducer';
 import { SnackbarItem } from '../model/types';
