@@ -1,5 +1,5 @@
-import { State } from '@/app/store/model/types';
-import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
+import { State } from '@/app/store/types';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
 
 export const getIsAuthenticated = (state: State) =>
   state[NameSpace.USER].authorizationStatus === AuthorizationStatus.AUTH;

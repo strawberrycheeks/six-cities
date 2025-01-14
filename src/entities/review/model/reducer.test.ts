@@ -1,7 +1,7 @@
-import { FetchStatus } from '@/shared/model/enums';
+import { FetchStatus } from '@/shared/model/constants';
 
+import { reviewSlice, setReviews, setReviewsFetchStatus } from '..';
 import { makeReviews } from '../lib/mocks';
-import { reviewSlice, setReviews, setReviewsFetchStatus } from './reducer';
 
 describe('review slice', () => {
   it('should correct change review fetch status', () => {

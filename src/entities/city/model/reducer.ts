@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { NameSpace } from '@/shared/model/enums';
+import { NameSpace } from '@/shared/model/constants';
 
-import { cities } from './consts';
-import { City } from './types';
+import { CITY_LIST } from '../constants';
+import { City } from '../types';
 
-export type CityState = {
+type CityState = {
   city: City;
 };
 
 const initialState: CityState = {
-  city: cities.Paris,
+  city: CITY_LIST.Paris,
 };
 
 export const citySlice = createSlice({

@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '@/shared/model/enums';
+import { AuthorizationStatus } from '@/shared/model/constants';
 
 import { makeUser } from '../lib/mocks';
 import { setAuthorizationStatus, setUser, userSlice } from './reducer';

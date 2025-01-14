@@ -1,11 +1,11 @@
 import { Action } from '@reduxjs/toolkit';
 
-import { ApiRoutes } from '@/app/api/model/api-routes';
+import { ApiRoute } from '@/app/api/routes';
 import { initAsyncActionsStore } from '@/app/lib/mocks';
-import { FetchStatus, NameSpace } from '@/shared/model/enums';
+import { FetchStatus, NameSpace } from '@/shared/model/constants';
 
+import { setReviews, setReviewsFetchStatus } from '..';
 import { makeReview, makeReviews } from '../lib/mocks';
-import { setReviews, setReviewsFetchStatus } from '../model/reducer';
 import { addOfferReview, fetchOfferReviews } from './api-actions';
 
 const extractActionsTypes = (actions: Action<string>[]) =>
@@ -22,7 +22,7 @@ describe('async review actions', () => {
   });
 
   it('should dispatch "fetchOfferReviews.pending", "setReviewsFetchStatus"x2, "setReviews" and "fetchOfferReviews.fulfilled" with thunk "fetchOfferReviews" on 200', async () => {
-    mockAxiosAdapter.onGet(ApiRoutes.LOGIN).reply(200, makeReviews());
+    mockAxiosAdapter.onGet(ApiRoute.LOGIN).reply(200, makeReviews());
 
     await store.dispatch(fetchOfferReviews('1'));
     const actions = extractActionsTypes(store.getActions());
@@ -37,7 +37,7 @@ describe('async review actions', () => {
   });
 
   it('should dispatch "addOfferReview.pending" and "addOfferReview.fulfilled" with thunk "addOfferReview" on 200', async () => {
-    mockAxiosAdapter.onGet(ApiRoutes.LOGIN).reply(200);
+    mockAxiosAdapter.onGet(ApiRoute.LOGIN).reply(200);
 
     await store.dispatch(addOfferReview({ offerId: '1', ...makeReview() }));
     const actions = extractActionsTypes(store.getActions());

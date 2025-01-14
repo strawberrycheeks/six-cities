@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { initAsyncActionsStore } from '@/app/lib/mocks';
-import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
 
 import { makeOfferPreview } from '../lib/mocks';
-import { OfferCard } from '.';
+import { OfferCard } from './offer-card';
 
 describe('<OfferCard />', () => {
   const { mockStoreCreator } = initAsyncActionsStore();

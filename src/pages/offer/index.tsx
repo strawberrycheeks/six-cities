@@ -2,34 +2,36 @@ import classNames from 'classnames';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '@/app/store/model/hooks';
-import { cities } from '@/entities/city';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { CITY_LIST } from '@/entities/city';
+import { Header } from '@/entities/header';
+import { Map } from '@/entities/map';
 import {
   clearOffer,
   clearOffers,
   fetchOffer,
   fetchOffersNearby,
+  setActiveOfferId,
+  setIsOfferFavorite,
+} from '@/entities/offer-card';
+import {
   getOffer,
   getOfferFetchStatus,
   getOffers,
   getOffersFetchStatus,
-  setActiveOfferId,
-  setIsOfferFavorite,
-} from '@/entities/offer-card';
+} from '@/entities/offer-card/model/selectors';
+import { OtherPlacesNearby } from '@/entities/offer-card/ui/other-places-nearby';
 import {
   addOfferReview,
   clearReviews,
   fetchOfferReviews,
   getLatest10Reviews,
   getReviewsFetchStatus,
+  ReviewsList,
 } from '@/entities/review';
 import { getIsAuthenticated } from '@/entities/user';
-import { Header } from '@/features/header';
-import { Map } from '@/features/map';
-import { OffersNearbyList } from '@/features/offers-nearby-list';
 import { ReviewForm } from '@/features/review-form';
-import { ReviewsList } from '@/features/reviews-list';
-import { FetchStatus } from '@/shared/model/enums';
+import { FetchStatus } from '@/shared/model/constants';
 import { Rating } from '@/shared/ui/rating';
 import { Spinner } from '@/shared/ui/spinner';
 
@@ -50,11 +52,6 @@ export const OfferPage = () => {
   const reviewsFetchStatus = useAppSelector(getReviewsFetchStatus);
 
   const isAuthenticated = useAppSelector(getIsAuthenticated);
-
-  const firstThreeOffers = useMemo(
-    () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
-    [offer, offers],
-  );
 
   useEffect(() => {
     if (!id) return;
@@ -78,6 +75,15 @@ export const OfferPage = () => {
       dispatch(clearReviews());
     };
   }, [dispatch, id, offer]);
+
+  const currentWithFirstThreeOffersNearby = useMemo(
+    () => (offer ? [offer, ...(offers?.slice(0, 3) ?? [])] : []),
+    [offer, offers],
+  );
+  const firstFourOffersNearby = useMemo(
+    () => offers?.slice(0, 4) ?? [],
+    [offers],
+  );
 
   const onReviewSubmit = useCallback(
     ({ rating, comment }: { comment: string; rating: number }) => {
@@ -245,7 +251,10 @@ export const OfferPage = () => {
             <section
               className={classNames('map', 'container', styles.offerMap)}
             >
-              <Map city={cities[offer.city.name]} points={firstThreeOffers} />
+              <Map
+                city={CITY_LIST[offer.city.name]}
+                points={currentWithFirstThreeOffersNearby}
+              />
             </section>
           </section>
         )}
@@ -253,7 +262,7 @@ export const OfferPage = () => {
           {offersFetchStatus !== FetchStatus.SUCCESS || !offers ? (
             <Spinner />
           ) : (
-            <OffersNearbyList offers={offers} />
+            <OtherPlacesNearby offers={firstFourOffersNearby} />
           )}
         </div>
       </main>

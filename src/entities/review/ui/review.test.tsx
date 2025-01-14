@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 
-import { dateToMonthWordYear } from '@/shared/ui/date-formatter';
+import { dateToMonthWordYear } from '@/shared/lib/date';
 
 import { makeReview } from '../lib/mocks';
-import { Review } from '.';
+import { Review } from './review';
 
 describe('<Review />', () => {
   it('should render correctly', () => {

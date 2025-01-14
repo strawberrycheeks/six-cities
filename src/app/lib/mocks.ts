@@ -3,8 +3,8 @@ import { Action } from '@reduxjs/toolkit';
 import MockAdapter from 'axios-mock-adapter';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 
-import { createAPI } from '../api/lib/create-api';
-import { State } from '../store/model/types';
+import { createAPI } from '../api/axios-instance';
+import { State } from '../store/types';
 
 type AppThunkDispatch = ThunkDispatch<
   State,

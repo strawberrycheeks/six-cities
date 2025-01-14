@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FetchStatus, NameSpace } from '@/shared/model/enums';
+import { FetchStatus, NameSpace } from '@/shared/model/constants';
 
 import { CommentGet } from '..';
 
-export type ReviewState = {
+type ReviewState = {
   reviews?: CommentGet[];
   reviewsFetchStatus: FetchStatus;
 };

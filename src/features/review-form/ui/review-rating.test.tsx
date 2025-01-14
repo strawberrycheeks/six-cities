@@ -23,7 +23,6 @@ describe('<ReviewRating />', () => {
     const { container } = render(component);
 
     expect(
-      // inputs order reversed, so the 2nd rating has index 3
       container.querySelectorAll<HTMLInputElement>('.form__rating-input')[3]
         ?.checked,
     ).toBe(true);

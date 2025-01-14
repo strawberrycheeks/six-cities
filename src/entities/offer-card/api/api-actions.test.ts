@@ -1,10 +1,12 @@
 import { Action } from '@reduxjs/toolkit';
 
-import { ApiRoutes } from '@/app/api/model/api-routes';
+import { ApiRoute } from '@/app/api/routes';
 import { initAsyncActionsStore } from '@/app/lib/mocks';
-import { FetchStatus, NameSpace } from '@/shared/model/enums';
+import { FetchStatus, NameSpace } from '@/shared/model/constants';
 
 import {
+  setFavoriteOffers,
+  setFavoriteOffersLoadingStatus,
   setOffer,
   setOfferLoadingStatus,
   setOffers,
@@ -35,7 +37,7 @@ describe('async review actions', () => {
   });
 
   it('should dispatch "fetchOffers.pending", "setOffersLoadingStatus"x2, "setOffers" and "fetchOffers.fulfilled" with thunk "fetchOffers" on 200', async () => {
-    mockAxiosAdapter.onGet(ApiRoutes.OFFERS).reply(200);
+    mockAxiosAdapter.onGet(ApiRoute.OFFERS).reply(200);
 
     await store.dispatch(fetchOffers());
     const actions = extractActionsTypes(store.getActions());
@@ -50,7 +52,7 @@ describe('async review actions', () => {
   });
 
   it('should dispatch "fetchOffer.pending", "setOfferLoadingStatus"x2, "setOffer" and "fetchOffer.fulfilled" with thunk "fetchOffer" on 200', async () => {
-    mockAxiosAdapter.onGet(`${ApiRoutes.OFFERS}/1`).reply(200);
+    mockAxiosAdapter.onGet(`${ApiRoute.OFFERS}/1`).reply(200);
 
     await store.dispatch(fetchOffer('1'));
     const actions = extractActionsTypes(store.getActions());
@@ -65,7 +67,7 @@ describe('async review actions', () => {
   });
 
   it('should dispatch "fetchOffersNearby.pending", "setOffersLoadingStatus"x2, "setOffers" and "fetchOffersNearby.fulfilled" with thunk "fetchOffersNearby" on 200', async () => {
-    mockAxiosAdapter.onGet(`${ApiRoutes.OFFERS}/1/nearby`).reply(200);
+    mockAxiosAdapter.onGet(`${ApiRoute.OFFERS}/1/nearby`).reply(200);
 
     await store.dispatch(fetchOffersNearby('1'));
     const actions = extractActionsTypes(store.getActions());
@@ -79,23 +81,23 @@ describe('async review actions', () => {
     ]);
   });
 
-  it('should dispatch "fetchFavoriteOffers.pending", "setOffersLoadingStatus"x2, "setOffers" and "fetchFavoriteOffers.fulfilled" with thunk "fetchFavoriteOffers" on 200', async () => {
-    mockAxiosAdapter.onGet(ApiRoutes.FAVORITE).reply(200);
+  it('should dispatch "fetchFavoriteOffers.pending", "setFavoriteOffersLoadingStatus"x2, "setFavoriteOffers" and "fetchFavoriteOffers.fulfilled" with thunk "fetchFavoriteOffers" on 200', async () => {
+    mockAxiosAdapter.onGet(ApiRoute.FAVORITE).reply(200);
 
     await store.dispatch(fetchFavoriteOffers());
     const actions = extractActionsTypes(store.getActions());
 
     expect(actions).toEqual([
       fetchFavoriteOffers.pending.type,
-      setOffersLoadingStatus.type,
-      setOffersLoadingStatus.type,
-      setOffers.type,
+      setFavoriteOffersLoadingStatus.type,
+      setFavoriteOffersLoadingStatus.type,
+      setFavoriteOffers.type,
       fetchFavoriteOffers.fulfilled.type,
     ]);
   });
 
-  it('should dispatch "setIsOfferFavorite.pending", "setOffer" and "setIsOfferFavorite.fulfilled" with thunk "setIsOfferFavorite" on 200', async () => {
-    mockAxiosAdapter.onPost(`${ApiRoutes.FAVORITE}/1/0`).reply(200);
+  it('should dispatch "setIsOfferFavorite.pending" and "setIsOfferFavorite.fulfilled" with thunk "setIsOfferFavorite" on 200', async () => {
+    mockAxiosAdapter.onPost(`${ApiRoute.FAVORITE}/1/0`).reply(200);
 
     await store.dispatch(
       setIsOfferFavorite({ offerId: '1', isFavorite: false, context: 'offer' }),
@@ -104,7 +106,6 @@ describe('async review actions', () => {
 
     expect(actions).toEqual([
       setIsOfferFavorite.pending.type,
-      setOffer.type,
       setIsOfferFavorite.fulfilled.type,
     ]);
   });

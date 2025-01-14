@@ -1,6 +1,8 @@
-export { Review } from './ui';
-export type { CommentGet, CommentPost } from './model/types';
+export type { CommentGet } from './types';
 
-export * from './model/reducer';
+export { Review } from './ui/review';
+export { ReviewsList } from './ui/reviews-list';
+
 export * from './model/selectors';
+export * from './model/reducer';
 export * from './api/api-actions';

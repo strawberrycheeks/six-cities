@@ -1,11 +1,11 @@
 import React from 'react';
 
 const reviewStarsSpec = [
-  { rating: 5, title: 'Perfect' },
-  { rating: 4, title: 'Good' },
-  { rating: 3, title: 'Not bad' },
-  { rating: 2, title: 'Badly' },
-  { rating: 1, title: 'Terribly' },
+  { rating: 5, title: 'perfect' },
+  { rating: 4, title: 'good' },
+  { rating: 3, title: 'not bad' },
+  { rating: 2, title: 'badly' },
+  { rating: 1, title: 'terribly' },
 ];
 
 type ReviewRatingProps = {

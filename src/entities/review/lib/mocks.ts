@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-import { CommentGet } from '../model/types';
+import { CommentGet } from '../types';
 
 export const makeReview = (): CommentGet => ({
   id: faker.datatype.uuid(),

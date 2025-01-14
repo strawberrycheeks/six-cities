@@ -1,8 +1,8 @@
 import { Action } from '@reduxjs/toolkit';
 
-import { ApiRoutes } from '@/app/api/model/api-routes';
+import { ApiRoute } from '@/app/api/routes';
 import { initAsyncActionsStore } from '@/app/lib/mocks';
-import { AuthorizationStatus, NameSpace } from '@/shared/model/enums';
+import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
 
 import { makeUser } from '../lib/mocks';
 import { setAuthorizationStatus, setUser } from '../model/reducer';
@@ -22,7 +22,7 @@ describe('async user actions', () => {
   });
 
   it('should dispatch "checkLogin.pending", "setAuthorizationStatus" and "checkLogin.rejected" with thunk "checkLogin" on 200', async () => {
-    mockAxiosAdapter.onGet(ApiRoutes.LOGIN).reply(200, makeUser());
+    mockAxiosAdapter.onGet(ApiRoute.LOGIN).reply(200, makeUser());
 
     await store.dispatch(checkLogin());
     const actions = extractActionsTypes(store.getActions());
@@ -37,7 +37,7 @@ describe('async user actions', () => {
   });
 
   it('should dispatch "checkLogin.pending", "setAuthorizationStatus" and "checkLogin.rejected" with thunk "checkLogin" on 400', async () => {
-    mockAxiosAdapter.onGet(ApiRoutes.LOGIN).reply(400);
+    mockAxiosAdapter.onGet(ApiRoute.LOGIN).reply(400);
 
     await store.dispatch(checkLogin());
     const actions = extractActionsTypes(store.getActions());
@@ -50,7 +50,7 @@ describe('async user actions', () => {
   });
 
   it('should dispatch "logout.pending", "setAuthorizationStatus", "setUser" and "logout.fulfilled" with thunk "logout"', async () => {
-    mockAxiosAdapter.onDelete(ApiRoutes.LOGIN).reply(200);
+    mockAxiosAdapter.onDelete(ApiRoute.LOGIN).reply(200);
 
     await store.dispatch(logout());
     const actions = extractActionsTypes(store.getActions());

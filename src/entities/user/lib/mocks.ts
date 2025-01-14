@@ -1,8 +1,8 @@
 import faker from 'faker';
 
-import { AuthInfo } from '..';
+import { User } from '..';
 
-export const makeUser = (): AuthInfo => ({
+export const makeUser = (): User => ({
   name: faker.name.firstName(),
   avatarUrl: faker.image.imageUrl(),
   isPro: faker.datatype.boolean(),
