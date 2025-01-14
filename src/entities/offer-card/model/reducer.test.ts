@@ -2,10 +2,13 @@ import { FetchStatus } from '@/shared/model/constants';
 
 import { makeOfferMaximum, makeOffers } from '../lib/mocks';
 import {
+  clearFavoriteOffers,
   clearOffer,
   clearOffers,
   offerCardSlice,
   setActiveOfferId,
+  setFavoriteOffers,
+  setFavoriteOffersLoadingStatus,
   setOffer,
   setOfferLoadingStatus,
   setOffers,
@@ -13,6 +16,7 @@ import {
 } from './reducer';
 
 const commonInitialState = {
+  favoriteOffersFetchStatus: FetchStatus.INITIAL,
   offersFetchStatus: FetchStatus.INITIAL,
   offerFetchStatus: FetchStatus.INITIAL,
 };
@@ -47,6 +51,22 @@ describe('offer card slice', () => {
     expect(result).toEqual(expectedState);
   });
 
+  it('should correct change favorite offers', () => {
+    const favoriteOffers = makeOffers();
+
+    const expectedState = {
+      ...commonInitialState,
+      favoriteOffers,
+    };
+
+    const result = offerCardSlice.reducer(
+      commonInitialState,
+      setFavoriteOffers(favoriteOffers),
+    );
+
+    expect(result).toEqual(expectedState);
+  });
+
   it('should correct change offer fetch status', () => {
     const expectedState = {
       ...commonInitialState,
@@ -70,6 +90,20 @@ describe('offer card slice', () => {
     const result = offerCardSlice.reducer(
       commonInitialState,
       setOffersLoadingStatus(FetchStatus.SUCCESS),
+    );
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should correct change favorite offers fetch status', () => {
+    const expectedState = {
+      ...commonInitialState,
+      favoriteOffersFetchStatus: FetchStatus.SUCCESS,
+    };
+
+    const result = offerCardSlice.reducer(
+      commonInitialState,
+      setFavoriteOffersLoadingStatus(FetchStatus.SUCCESS),
     );
 
     expect(result).toEqual(expectedState);
@@ -107,6 +141,24 @@ describe('offer card slice', () => {
     };
 
     const result = offerCardSlice.reducer(initialState, clearOffers());
+
+    expect(result).toEqual(expectedState);
+  });
+
+  it('should correct clear favorite offers', () => {
+    const initialState = {
+      ...commonInitialState,
+      favoriteOffers: makeOffers(),
+      favoriteOffersFetchStatus: FetchStatus.SUCCESS,
+    };
+
+    const expectedState = {
+      ...commonInitialState,
+      favoriteOffers: undefined,
+      favoriteOffersFetchStatus: FetchStatus.INITIAL,
+    };
+
+    const result = offerCardSlice.reducer(initialState, clearFavoriteOffers());
 
     expect(result).toEqual(expectedState);
   });
