@@ -42,7 +42,7 @@ export const useMap = (
 
   useEffect(() => {
     map?.flyTo([city.latitude, city.longitude], DEFAULT_ZOOM);
-  }, [city]);
+  }, [map, city]);
 
   return map;
 };

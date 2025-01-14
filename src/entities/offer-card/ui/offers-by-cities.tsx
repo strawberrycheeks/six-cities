@@ -28,7 +28,7 @@ export const OffersByCities = ({ offers }: OffersByCitiesProps) => {
   return (
     <ul className="favorites__list">
       {offers.length === 0 ? (
-        <p>No favorite offers yet</p>
+        <p>Nothing yet saved</p>
       ) : (
         Object.entries(cityToOffersMap).map(([cityName, cityOffers]) => (
           <li className="favorites__locations-items" key={cityName}>

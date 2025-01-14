@@ -18,7 +18,7 @@ export const Rating = ({
   return (
     <div className={classNames(containerStyles, 'rating')}>
       <div className={classNames(starsStyles, 'rating__stars')}>
-        <span style={{ width: `${20 * Math.trunc(rating)}%` }}></span>
+        <span style={{ width: `${20 * Math.round(rating)}%` }}></span>
         <span className="visually-hidden">Rating {rating}</span>
       </div>
       {Boolean(isFullMode) && (

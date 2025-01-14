@@ -49,6 +49,6 @@ describe('<OffersByCities />', () => {
 
     render(component);
 
-    expect(screen.getByText('No favorite offers yet')).toBeInTheDocument();
+    expect(screen.getByText('Nothing yet saved')).toBeInTheDocument();
   });
 });
