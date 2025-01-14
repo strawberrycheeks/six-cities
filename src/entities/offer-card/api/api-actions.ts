@@ -6,6 +6,8 @@ import { DispatchStateExtra, State } from '@/app/store/types';
 import { FetchStatus, NameSpace } from '@/shared/model/constants';
 
 import {
+  setFavoriteOffers,
+  setFavoriteOffersLoadingStatus,
   setOffer,
   setOfferLoadingStatus,
   setOffers,
@@ -70,12 +72,12 @@ export const fetchFavoriteOffers = createAsyncThunk<
 >(
   `${NameSpace.OFFER}/fetchFavoriteOffers`,
   async (_arg, { dispatch, extra: api }) => {
-    dispatch(setOffersLoadingStatus(FetchStatus.LOADING));
+    dispatch(setFavoriteOffersLoadingStatus(FetchStatus.LOADING));
 
     const { data } = await api.get<OfferPreview[]>(ApiRoute.FAVORITE);
 
-    dispatch(setOffersLoadingStatus(FetchStatus.SUCCESS));
-    dispatch(setOffers(data));
+    dispatch(setFavoriteOffersLoadingStatus(FetchStatus.SUCCESS));
+    dispatch(setFavoriteOffers(data));
   },
 );
 
@@ -93,10 +95,36 @@ export const setIsOfferFavorite = createAsyncThunk<
       `${ApiRoute.FAVORITE}/${offerId}/${Number(isFavorite)}`,
     );
 
+    if (isFavorite) {
+      const state = getState() as State;
+      if (!state[NameSpace.OFFER].offers) return;
+
+      const newFavoriteOffer = state[NameSpace.OFFER].offers.filter(
+        (offer) => offer.id === offerId,
+      );
+
+      const newFavoriteOffersState = [
+        ...(state[NameSpace.OFFER].favoriteOffers ?? []),
+        ...newFavoriteOffer,
+      ];
+
+      dispatch(setFavoriteOffers(newFavoriteOffersState));
+    } else {
+      const state = getState() as State;
+      if (!state[NameSpace.OFFER].favoriteOffers) return;
+
+      const newFavoriteOffersState = state[
+        NameSpace.OFFER
+      ].favoriteOffers.filter((offer) => offer.id !== offerId);
+
+      dispatch(setFavoriteOffers(newFavoriteOffersState));
+    }
+
     if (context === 'offer') {
       dispatch(setOffer(data));
     } else {
       const state = getState() as State;
+
       if (!state[NameSpace.OFFER].offers) return;
 
       const newOffersState = state[NameSpace.OFFER].offers.map((offer) =>

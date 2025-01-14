@@ -35,6 +35,8 @@ describe('<App />', () => {
       [NameSpace.OFFER]: {
         offers: makeOffers(),
         offersFetchStatus: FetchStatus.SUCCESS,
+        favoriteOffers: makeOffers(),
+        favoriteOffersFetchStatus: FetchStatus.SUCCESS,
         offer: makeOfferMaximum(),
         offerFetchStatus: FetchStatus.SUCCESS,
       },
@@ -73,6 +75,10 @@ describe('<App />', () => {
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
       },
+      [NameSpace.OFFER]: {
+        favoriteOffers: [],
+        favoriteOffersFetchStatus: FetchStatus.SUCCESS,
+      },
       [NameSpace.SNACKBAR]: {
         items: [],
       },
@@ -98,6 +104,10 @@ describe('<App />', () => {
     store = mockStoreCreator({
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      },
+      [NameSpace.OFFER]: {
+        favoriteOffers: [],
+        favoriteOffersFetchStatus: FetchStatus.SUCCESS,
       },
       [NameSpace.SNACKBAR]: {
         items: [],

@@ -11,5 +11,11 @@ export const getOffers = (state: State) => state[NameSpace.OFFER].offers;
 export const getOffersFetchStatus = (state: State) =>
   state[NameSpace.OFFER].offersFetchStatus;
 
+export const getFavoriteOffers = (state: State) =>
+  state[NameSpace.OFFER].favoriteOffers;
+
+export const getFavoriteOffersFetchStatus = (state: State) =>
+  state[NameSpace.OFFER].favoriteOffersFetchStatus;
+
 export const getActiveOfferId = (state: State) =>
   state[NameSpace.OFFER].activeOfferId;

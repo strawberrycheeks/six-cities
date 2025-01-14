@@ -5,18 +5,22 @@ import { FetchStatus, NameSpace } from '@/shared/model/constants';
 import { OfferMaximum, OfferPreview } from '../types';
 
 type OfferState = {
+  offer?: OfferMaximum;
+  offerFetchStatus: FetchStatus;
+
   offers?: OfferPreview[];
   offersFetchStatus: FetchStatus;
 
-  offer?: OfferMaximum;
-  offerFetchStatus: FetchStatus;
+  favoriteOffers?: OfferPreview[];
+  favoriteOffersFetchStatus: FetchStatus;
 
   activeOfferId?: OfferPreview['id'];
 };
 
 const initialState: OfferState = {
-  offersFetchStatus: FetchStatus.INITIAL,
   offerFetchStatus: FetchStatus.INITIAL,
+  offersFetchStatus: FetchStatus.INITIAL,
+  favoriteOffersFetchStatus: FetchStatus.INITIAL,
 };
 
 export const offerCardSlice = createSlice({
@@ -32,6 +36,19 @@ export const offerCardSlice = createSlice({
     },
     setOffersLoadingStatus: (state, action: PayloadAction<FetchStatus>) => {
       state.offersFetchStatus = action.payload;
+    },
+    setFavoriteOffers: (state, action: PayloadAction<OfferPreview[]>) => {
+      state.favoriteOffers = action.payload;
+    },
+    clearFavoriteOffers: (state) => {
+      state.favoriteOffers = undefined;
+      state.favoriteOffersFetchStatus = FetchStatus.INITIAL;
+    },
+    setFavoriteOffersLoadingStatus: (
+      state,
+      action: PayloadAction<FetchStatus>,
+    ) => {
+      state.favoriteOffersFetchStatus = action.payload;
     },
     setOffer: (state, action: PayloadAction<OfferMaximum>) => {
       state.offer = action.payload;
@@ -53,11 +70,14 @@ export const offerCardSlice = createSlice({
 });
 
 export const {
-  setOffers,
-  clearOffers,
-  setOffersLoadingStatus,
   setOffer,
   clearOffer,
   setOfferLoadingStatus,
+  setOffers,
+  clearOffers,
+  setOffersLoadingStatus,
+  setFavoriteOffers,
+  clearFavoriteOffers,
+  setFavoriteOffersLoadingStatus,
   setActiveOfferId,
 } = offerCardSlice.actions;

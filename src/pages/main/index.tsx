@@ -14,6 +14,7 @@ import {
 import { Header } from '@/entities/header';
 import {
   clearOffers,
+  fetchFavoriteOffers,
   fetchOffers,
   getOffers,
   getOffersFetchStatus,
@@ -42,6 +43,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
 
     return () => {
       dispatch(clearOffers());

@@ -3,7 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { initAsyncActionsStore } from '@/app/lib/mocks';
-import { AuthorizationStatus, NameSpace } from '@/shared/model/constants';
+import {
+  AuthorizationStatus,
+  FetchStatus,
+  NameSpace,
+} from '@/shared/model/constants';
 
 import { makeUser } from '../user/lib/mocks';
 import { Header } from './header';
@@ -16,6 +20,10 @@ describe('<Header />', () => {
     store = mockStoreCreator({
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
+      },
+      [NameSpace.OFFER]: {
+        favoriteOffers: [],
+        favoriteOffersFetchStatus: FetchStatus.SUCCESS,
       },
     });
 
@@ -39,6 +47,10 @@ describe('<Header />', () => {
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.AUTH,
         user,
+      },
+      [NameSpace.OFFER]: {
+        favoriteOffers: [],
+        favoriteOffersFetchStatus: FetchStatus.SUCCESS,
       },
     });
 

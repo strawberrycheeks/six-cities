@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { AppRoute } from '@/shared/model/constants';
 
+import { getFavoriteOffers } from '../offer-card';
 import { getIsAuthenticated, getUser, logout } from '../user';
 
 type HeaderProps = {
@@ -11,6 +12,8 @@ type HeaderProps = {
 
 export const Header = ({ isOnlyLogo }: HeaderProps) => {
   const dispatch = useAppDispatch();
+
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   const isAuthenticated = useAppSelector(getIsAuthenticated);
 
@@ -50,7 +53,9 @@ export const Header = ({ isOnlyLogo }: HeaderProps) => {
                       <span className="header__user-name user__name">
                         {user?.email}
                       </span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">
+                        {favoriteOffers?.length ?? 0}
+                      </span>
                     </Link>
                   </li>
                 )}

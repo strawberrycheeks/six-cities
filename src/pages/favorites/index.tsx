@@ -3,10 +3,9 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { Header } from '@/entities/header';
 import {
-  clearOffers,
   fetchFavoriteOffers,
-  getOffers,
-  getOffersFetchStatus,
+  getFavoriteOffers,
+  getFavoriteOffersFetchStatus,
   OffersByCities,
 } from '@/entities/offer-card';
 import { FetchStatus } from '@/shared/model/constants';
@@ -15,15 +14,11 @@ import { Spinner } from '@/shared/ui/spinner';
 export const FavoritesPage = () => {
   const dispatch = useAppDispatch();
 
-  const offers = useAppSelector(getOffers);
-  const offersFetchStatus = useAppSelector(getOffersFetchStatus);
+  const offers = useAppSelector(getFavoriteOffers);
+  const offersFetchStatus = useAppSelector(getFavoriteOffersFetchStatus);
 
   useEffect(() => {
     dispatch(fetchFavoriteOffers());
-
-    return () => {
-      dispatch(clearOffers());
-    };
   }, [dispatch]);
 
   return (
